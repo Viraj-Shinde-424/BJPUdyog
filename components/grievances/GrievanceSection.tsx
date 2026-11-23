@@ -474,7 +474,7 @@ export const GrievanceSection: React.FC = () => {
                 </div>
               )}
 
-              {/* Strict Private Timeline (Restricted to owner & authorized staff - Enlarged Font Harmonized) */}
+              {/* Strict Private Timeline (Restricted to owner & authorized staff) */}
               <div className="pt-5 border-t border-slate-200">
                 <div className="flex items-center justify-between mb-3.5">
                   <div className="flex items-center gap-2">
@@ -483,24 +483,24 @@ export const GrievanceSection: React.FC = () => {
                       {t('grievances', 'timelineTitle')}
                     </h4>
                   </div>
-                  <span className="text-xs font-bold text-slate-500 bg-slate-100 px-3 py-1 rounded-full border border-slate-200 flex items-center gap-1.5">
-                    <Lock className="w-3.5 h-3.5 text-slate-600" />
+                  <span className="text-xs sm:text-sm text-slate-500 font-semibold flex items-center gap-1.5">
+                    <Lock className="w-3.5 h-3.5" />
                     <span>{lang === 'en' ? 'Confidential' : lang === 'hi' ? 'गोपनीय' : 'गोपनीय'}</span>
                   </span>
                 </div>
 
                 {/* Privacy Restriction Banner */}
                 {isRestrictedView ? (
-                  <div className="bg-amber-50 border border-amber-200 p-4 rounded-xl text-xs sm:text-sm text-amber-900 flex items-start gap-2.5">
-                    <Lock className="w-4 h-4 text-amber-700 flex-shrink-0 mt-0.5" />
+                  <div className="bg-amber-50 border border-amber-200 p-4 sm:p-5 rounded-2xl text-sm text-amber-900 flex items-start gap-3">
+                    <Lock className="w-5 h-5 text-amber-700 flex-shrink-0 mt-0.5" />
                     <div>
                       <div className="font-bold text-sm sm:text-base mb-1">
                         {lang === 'en' ? 'Restricted Access' : lang === 'hi' ? 'सीमित पहुंच (Restricted Access)' : 'प्रवेश मर्यादित (Restricted Access)'}
                       </div>
-                      <p className="leading-relaxed">
+                      <p className="leading-relaxed text-xs sm:text-sm">
                         {t('grievances', 'privacyNotice')}
                       </p>
-                      <p className="mt-1.5 text-xs text-amber-800 font-medium">
+                      <p className="mt-1 text-xs text-amber-700">
                         {lang === 'en'
                           ? 'Please sign in with the original business owner or authorized staff account to inspect the confidential resolution notes.'
                           : lang === 'hi'
@@ -512,21 +512,21 @@ export const GrievanceSection: React.FC = () => {
                 ) : (
                   <div className="space-y-4">
                     {/* Security Notice for authorized viewers */}
-                    <div className="bg-slate-50 border border-slate-200 p-3 rounded-xl text-xs sm:text-sm text-slate-700 font-medium flex items-center gap-2">
+                    <div className="bg-slate-50 border border-slate-200 p-3 sm:p-3.5 rounded-xl text-xs sm:text-sm text-slate-700 font-medium flex items-center gap-2.5">
                       <ShieldCheck className="w-4 h-4 text-[#136938] flex-shrink-0" />
                       <span>{t('grievances', 'privacyNotice')}</span>
                     </div>
 
-                    {/* Timeline items (Generous, Legible Fonts Matching Explanation) */}
-                    <div className="border-l-2 border-slate-200 ml-3.5 pl-4 sm:pl-5 space-y-4 py-2">
+                    {/* Timeline items */}
+                    <div className="border-l-2 border-slate-200 ml-3 pl-4 sm:pl-5 space-y-4 py-2">
                       {activeGrievance.updates.map((up) => (
                         <div key={up.id} className="relative">
-                          <div className="absolute -left-[23px] sm:-left-[27px] top-1.5 w-3 h-3 rounded-full bg-[#E35914] border-2 border-white ring-2 ring-orange-200" />
-                          <div className="flex items-center justify-between text-xs sm:text-sm text-slate-600 mb-1.5 font-semibold">
-                            <span className="font-extrabold text-sm sm:text-base text-slate-900">{up.authorName}</span>
-                            <span>{new Date(up.createdAt).toLocaleString()}</span>
+                          <div className="absolute -left-[21px] sm:-left-[25px] top-1.5 w-2.5 h-2.5 rounded-full bg-[#E35914] border-2 border-white ring-2 ring-orange-100" />
+                          <div className="flex items-center justify-between text-xs sm:text-sm text-slate-600 mb-1.5">
+                            <span className="font-extrabold text-slate-900 text-sm sm:text-base">{up.authorName}</span>
+                            <span className="text-xs text-slate-400">{new Date(up.createdAt).toLocaleString()}</span>
                           </div>
-                          <p className="text-sm sm:text-base text-slate-700 bg-slate-50 p-3.5 sm:p-4 rounded-xl border border-slate-200 leading-relaxed font-normal">
+                          <p className="text-sm sm:text-base text-slate-800 bg-slate-50 p-3.5 sm:p-4 rounded-xl border border-slate-200 leading-relaxed font-normal">
                             {up.updateNotes}
                           </p>
                         </div>
@@ -549,13 +549,13 @@ export const GrievanceSection: React.FC = () => {
                             ? 'शिकायत फॉलो-अप पर नई टिप्पणी / स्थिति दर्ज करें...'
                             : 'तक्रारीच्या पाठपुराव्याची नवीन स्थिती / शेरा लिहा...'
                         }
-                        className="w-full text-xs sm:text-sm px-4 py-3 rounded-xl border border-slate-300 focus:border-[#E35914] focus:outline-none bg-white font-medium"
+                        className="w-full text-xs sm:text-sm px-4 py-2.5 sm:py-3 rounded-xl border border-slate-300 focus:border-[#E35914] focus:outline-none bg-slate-50/50 font-medium"
                       />
                       <Button
                         variant="primary"
                         size="md"
                         onClick={handleAddUpdate}
-                        className="px-5 py-3 text-xs sm:text-sm font-bold shadow-xs rounded-xl flex-shrink-0"
+                        className="px-5 py-2.5 sm:py-3 text-xs sm:text-sm font-bold rounded-xl flex-shrink-0 shadow-sm"
                         icon={<Send className="w-4 h-4" />}
                       >
                         {t('grievances', 'addUpdateBtn')}

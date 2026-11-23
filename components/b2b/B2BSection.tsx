@@ -350,7 +350,7 @@ export const B2BSection: React.FC = () => {
                   isRequirement ? 'border-t-4 border-t-[#E35914]' : 'border-t-4 border-t-[#136938]'
                 } ${isExpanded ? 'ring-2 ring-[#D95F1A]/30' : ''}`}
               >
-                {/* Clean Initial Card Face (Like Udyog Samvad Minimalist Aesthetic - Zero Badge Clutter) */}
+                {/* Clean Initial Card Face (Like Udyog Samvad Minimalist Aesthetic - Zero Tag Clutter) */}
                 <div
                   onClick={() => toggleConversation(post.id)}
                   className="p-4 sm:p-4.5 flex-1 flex flex-col justify-between cursor-pointer group"
@@ -375,14 +375,14 @@ export const B2BSection: React.FC = () => {
                     </div>
                   </div>
 
-                  {/* Bottom Bar: District/Date + Responses count + Action arrow (Compact vertical spacing) */}
-                  <div className="border-t border-slate-100 pt-2.5 mt-3 sm:mt-3.5 flex items-center justify-between text-xs">
-                    <span className="text-xs text-slate-400 font-medium">
+                  {/* Compact Bottom Bar: District/Date + Responses count + Action arrow */}
+                  <div className="border-t border-slate-100 pt-2.5 mt-3 flex items-center justify-between text-xs">
+                    <span className="text-xs text-slate-400">
                       {post.district} • {new Date(post.createdAt).toLocaleDateString(lang === 'en' ? 'en-IN' : 'mr-IN')}
                     </span>
 
                     <div className="flex items-center gap-2.5">
-                      <span className="text-xs text-slate-500 inline-flex items-center gap-1 bg-slate-100 px-2 py-0.5 rounded-lg font-semibold">
+                      <span className="text-xs text-slate-500 inline-flex items-center gap-1 bg-slate-100 px-2.5 py-1 rounded-lg font-semibold">
                         <MessageSquare className="w-3.5 h-3.5 text-[#E35914]" />
                         <span>{post.replies.length} {t('b2b', 'replyCount')}</span>
                       </span>
@@ -402,26 +402,6 @@ export const B2BSection: React.FC = () => {
                 {/* EXPANDED CONTENT: ONLY SHOWN WHEN USER CLICKS */}
                 {isExpanded && (
                   <div className="px-5 pb-5 pt-3 border-t border-slate-100 bg-slate-50/40 space-y-4 animate-fadeIn">
-                    {/* Category & Sector Badges inside expanded view */}
-                    <div className="flex flex-wrap items-center gap-2">
-                      <span
-                        className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold border ${config.bg} ${config.text}`}
-                      >
-                        <TypeIcon className="w-3.5 h-3.5" />
-                        <span>{config.label}</span>
-                      </span>
-
-                      {resourceLabel && (
-                        <span className="text-xs bg-slate-100 text-slate-700 px-2.5 py-1 rounded-lg font-semibold border border-slate-200">
-                          {resourceLabel}
-                        </span>
-                      )}
-
-                      <span className="text-xs bg-slate-50 text-slate-700 px-2.5 py-1 rounded-lg font-semibold border border-slate-200">
-                        {post.sector}
-                      </span>
-                    </div>
-
                     {/* Full Description */}
                     <div>
                       <h4 className="text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
