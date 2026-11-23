@@ -357,12 +357,12 @@ export const B2BSection: React.FC = () => {
                 >
                   <div>
                     {/* Prominent, Legible Title */}
-                    <h3 className="text-[15px] sm:text-base font-extrabold text-slate-900 group-hover:text-[#D95F1A] transition-colors leading-snug line-clamp-2 mb-1.5">
+                    <h3 className="text-[15px] sm:text-base font-extrabold text-slate-900 group-hover:text-[#D95F1A] transition-colors leading-snug line-clamp-2 mb-1">
                       {post.title}
                     </h3>
 
-                    {/* Single Line: Supplier / Tenderer Info */}
-                    <div className="flex items-center gap-2 text-xs sm:text-sm font-semibold text-slate-600 truncate">
+                    {/* Single Line: Supplier / Tenderer Info (Reduced distance to title) */}
+                    <div className="flex items-center gap-2 text-xs sm:text-sm font-semibold text-slate-600 truncate mt-0.5">
                       <span className="truncate">{post.authorName} ({post.authorBusinessName})</span>
                       {post.isOfficeBearer && (
                         <span className="flex-shrink-0">
@@ -376,7 +376,7 @@ export const B2BSection: React.FC = () => {
                   </div>
 
                   {/* Compact Bottom Bar: District/Date + Responses count + Action arrow */}
-                  <div className="border-t border-slate-100 pt-2.5 mt-3 flex items-center justify-between text-xs">
+                  <div className="border-t border-slate-100 pt-2 mt-2 flex items-center justify-between text-xs">
                     <span className="text-xs text-slate-400">
                       {post.district} • {new Date(post.createdAt).toLocaleDateString(lang === 'en' ? 'en-IN' : 'mr-IN')}
                     </span>

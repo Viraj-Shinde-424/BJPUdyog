@@ -444,7 +444,7 @@ export const SamvadSection: React.FC = () => {
                   {/* Clean Initial Card Face (Luma / Minimalist Aesthetic - Zero Description Clutter) */}
                   <div
                     onClick={() => toggleTopic(topic.id)}
-                    className="p-5 flex-1 flex flex-col justify-between cursor-pointer group"
+                    className="p-4 sm:p-4.5 flex-1 flex flex-col justify-between cursor-pointer group"
                   >
                     <div>
                       {/* Prominent, Legible Title */}
@@ -453,8 +453,8 @@ export const SamvadSection: React.FC = () => {
                       </h3>
                     </div>
 
-                    {/* Bottom Bar: Host info + Action arrow */}
-                    <div className="border-t border-slate-100 pt-3 mt-4 flex items-center justify-between text-xs">
+                    {/* Bottom Bar: Host info + Action arrow (Reduced distance to title) */}
+                    <div className="border-t border-slate-100 pt-2 mt-2 flex items-center justify-between text-xs">
                       <div className="flex items-center gap-2 min-w-0 pr-2">
                         <div className="w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center flex-shrink-0 text-slate-600">
                           {isAssociation ? (

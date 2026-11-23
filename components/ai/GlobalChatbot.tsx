@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import { useApp } from '@/lib/context/AppContext';
 import { Language } from '@/lib/types';
 import {
@@ -32,6 +33,10 @@ interface ChatMessage {
 }
 
 export const GlobalChatbot: React.FC = () => {
+  const router = useRouter();
+  const isHomepage = router.pathname === '/';
+  const [hasScrolledOnHome, setHasScrolledOnHome] = useState(!isHomepage);
+
   const { lang, setLang } = useApp();
   const [isOpen, setIsOpen] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
@@ -41,6 +46,26 @@ export const GlobalChatbot: React.FC = () => {
   const [copiedId, setCopiedId] = useState<string | null>(null);
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  // Homepage only: hide chatbot over the hero video until user scrolls down a little bit
+  useEffect(() => {
+    if (!isHomepage) {
+      setHasScrolledOnHome(true);
+      return;
+    }
+
+    const handleScroll = () => {
+      if (window.scrollY > 140) {
+        setHasScrolledOnHome(true);
+      } else {
+        setHasScrolledOnHome(false);
+      }
+    };
+
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [isHomepage]);
 
   const initialWelcomeText = {
     mr: `नमस्कार! मी **उद्योग सारथी AI** — भाजप उद्योग आघाडी, महाराष्ट्राचा अधिकृत डिजिटल सल्लागार.\n\nमी आपल्याला खालील विषयांवर थेट मार्गदर्शन करू शकतो:\n* **शासकीय योजना व सबसिडी**: PSI 2019, CMEGP (₹50 लाख कर्ज), सोलर रूफटॉप, अन्न प्रक्रिया इ.\n* **नवीन उद्योग सुरू करण्याची प्रक्रिया**: MIDC जागा, MPCB प्रदूषण परवाने, MAITRI सिंगल विंडो, फॅक्टरी लायसन्स.\n\nआपल्या उद्योगाबद्दल कोणताही प्रश्न विचारा!`,
@@ -214,7 +239,13 @@ export const GlobalChatbot: React.FC = () => {
     <>
       {/* Floating Action Trigger Button (Bottom Right) */}
       {!isOpen && (
-        <div className="fixed bottom-5 right-5 sm:bottom-6 sm:right-6 z-50 flex items-center gap-3">
+        <div
+          className={`fixed bottom-5 right-5 sm:bottom-6 sm:right-6 z-50 flex items-center gap-3 transition-all duration-300 ${
+            isHomepage && !hasScrolledOnHome
+              ? 'opacity-0 pointer-events-none translate-y-6 scale-90'
+              : 'opacity-100 pointer-events-auto translate-y-0 scale-100'
+          }`}
+        >
           {/* Animated Pill Tooltip on wide screens */}
           <div className="hidden md:flex items-center gap-2 bg-white/95 backdrop-blur-md px-3.5 py-2 rounded-full border border-orange-200 shadow-lg text-xs font-bold text-slate-800 animate-float-slow">
             <span className="w-2 h-2 rounded-full bg-[#136938] animate-pulse" />
