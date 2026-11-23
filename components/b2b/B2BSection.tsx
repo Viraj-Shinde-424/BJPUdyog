@@ -21,7 +21,12 @@ import {
   ShoppingCart,
   CheckCircle2,
   Building2,
+  Building,
+  User,
   ExternalLink,
+  LayoutGrid,
+  List,
+  ArrowRight,
 } from 'lucide-react';
 import { NewPostModal } from './NewPostModal';
 import { localizeB2BPost, localizeSector } from '@/lib/i18n/dataLocalizer';
@@ -32,6 +37,7 @@ export const B2BSection: React.FC = () => {
   const [posts, setPosts] = useState<B2BPost[]>([]);
   const [selectedSector, setSelectedSector] = useState('all');
   const [selectedType, setSelectedType] = useState<string>('all');
+  const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [searchQuery, setSearchQuery] = useState('');
   const [loading, setLoading] = useState(true);
   const [modalOpen, setModalOpen] = useState(false);
@@ -179,9 +185,9 @@ export const B2BSection: React.FC = () => {
         </Button>
       </div>
 
-      {/* 2. Top Filter & Search Bar (Harmonized with Samvad & Grievances) */}
+      {/* 2. Top Filter & Search Bar (Harmonized with Udyog Samvad) */}
       <div className="bg-white p-5 sm:p-6 rounded-2xl border border-slate-200 space-y-4 shadow-xs">
-        {/* Row 1: Search input + Post count badge (TOP) */}
+        {/* Row 1: Search input + Post count badge + Grid/List View Switcher (TOP) */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pb-3 border-b border-slate-100">
           <form onSubmit={handleSearchSubmit} className="relative flex-1 w-full">
             <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-3.5" />
@@ -203,65 +209,99 @@ export const B2BSection: React.FC = () => {
               <span className="text-[#D95F1A] font-black">{posts.length}</span>{' '}
               <span>{lang === 'en' ? 'posts available' : 'निविदा/पोस्ट्स उपलब्ध'}</span>
             </div>
+
+            {/* Interactive View Switcher (Grid Showcase vs Clean List) */}
+            <div className="flex items-center bg-slate-100 p-1 rounded-xl border border-slate-200">
+              <button
+                type="button"
+                onClick={() => setViewMode('grid')}
+                className={`p-1.5 rounded-lg transition-all ${
+                  viewMode === 'grid'
+                    ? 'bg-white text-[#D95F1A] shadow-xs font-bold'
+                    : 'text-slate-500 hover:text-slate-800'
+                }`}
+                title="कार्ड व्ह्यू (Grid Showcase)"
+              >
+                <LayoutGrid className="w-4 h-4" />
+              </button>
+              <button
+                type="button"
+                onClick={() => setViewMode('list')}
+                className={`p-1.5 rounded-lg transition-all ${
+                  viewMode === 'list'
+                    ? 'bg-white text-[#D95F1A] shadow-xs font-bold'
+                    : 'text-slate-500 hover:text-slate-800'
+                }`}
+                title="यादी व्ह्यू (List View)"
+              >
+                <List className="w-4 h-4" />
+              </button>
+            </div>
           </div>
         </div>
 
-        {/* Row 2: Combobox Dropdown + Sector Filter Chips (BOTTOM) */}
-        <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3 pt-1">
-          {/* Combobox Dropdown for Tenders and Suppliers */}
-          <div className="flex items-center gap-2.5 flex-shrink-0">
-            <label className="text-xs sm:text-sm font-bold text-slate-700 whitespace-nowrap flex items-center gap-1.5">
-              <Filter className="w-4 h-4 text-[#D95F1A]" />
-              <span>{lang === 'en' ? 'Filter by:' : 'निवडा:'}</span>
-            </label>
-            <select
-              value={selectedType}
-              onChange={(e) => setSelectedType(e.target.value)}
-              className="px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold border border-slate-300 bg-white text-slate-800 shadow-2xs focus:border-[#D95F1A] focus:outline-none focus:ring-2 focus:ring-orange-100 transition-all cursor-pointer"
-            >
-              <option value="all">
-                {lang === 'en' ? 'All Posts' : 'सर्व पोस्ट्स'}
-              </option>
-              <option value="requirement">
-                {lang === 'en' ? 'Tenders' : 'निविदा (Requirements)'}
-              </option>
-              <option value="offer">
-                {lang === 'en' ? 'Suppliers' : 'पुरवठादार (Offers)'}
-              </option>
-            </select>
-          </div>
+        {/* Row 2: Type Dropdown + Category/Sector Dropdown to the right (BOTTOM) */}
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 pt-1">
+          <div className="flex flex-wrap items-center gap-3">
+            {/* 1. Combobox Dropdown for Tenders and Suppliers */}
+            <div className="flex items-center gap-2 flex-shrink-0">
+              <label className="text-xs sm:text-sm font-bold text-slate-700 whitespace-nowrap flex items-center gap-1.5">
+                <Filter className="w-4 h-4 text-[#D95F1A]" />
+                <span>{lang === 'en' ? 'Filter by:' : 'निवडा:'}</span>
+              </label>
+              <div className="relative">
+                <select
+                  value={selectedType}
+                  onChange={(e) => setSelectedType(e.target.value)}
+                  className="appearance-none pl-3.5 pr-8 py-2.5 rounded-xl text-xs sm:text-sm font-bold border border-slate-300 bg-white text-slate-800 shadow-2xs focus:border-[#D95F1A] focus:outline-none focus:ring-2 focus:ring-orange-100 transition-all cursor-pointer"
+                >
+                  <option value="all">
+                    {lang === 'en' ? 'All Posts' : 'सर्व पोस्ट्स (All)'}
+                  </option>
+                  <option value="requirement">
+                    {lang === 'en' ? 'Tenders' : 'निविदा (Requirements)'}
+                  </option>
+                  <option value="offer">
+                    {lang === 'en' ? 'Suppliers' : 'पुरवठादार (Offers)'}
+                  </option>
+                </select>
+                <ChevronDown className="w-4 h-4 text-slate-500 absolute right-2.5 top-3 pointer-events-none" />
+              </div>
+            </div>
 
-          {/* Sector Filter Chips */}
-          <div className="flex items-center gap-2 overflow-x-auto no-scrollbar py-1 text-xs">
-            <span className="text-xs text-slate-500 font-bold whitespace-nowrap pl-1">
-              {lang === 'en' ? 'Sector:' : 'क्षेत्र:'}
-            </span>
-            {sectors.map((sec) => (
-              <button
-                key={sec}
-                onClick={() => setSelectedSector(sec)}
-                className={`px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition-all ${
-                  selectedSector === sec
-                    ? 'bg-[#D95F1A] text-white shadow-xs font-bold'
-                    : 'bg-slate-100 text-slate-700 hover:bg-slate-200 border border-slate-200'
-                }`}
-              >
-                {sec === 'all'
-                  ? lang === 'en'
-                    ? 'All'
-                    : lang === 'hi'
-                    ? 'सभी'
-                    : 'सर्व'
-                  : localizeSector(sec, lang)}
-              </button>
-            ))}
+            {/* 2. Category / Sector Dropdown (TO THE RIGHT OF THE DROPDOWN) */}
+            <div className="flex items-center gap-2 flex-shrink-0">
+              <label className="text-xs sm:text-sm font-bold text-slate-700 whitespace-nowrap flex items-center gap-1.5">
+                <Layers className="w-4 h-4 text-[#136938]" />
+                <span>{lang === 'en' ? 'Category / Sector:' : 'उद्योग क्षेत्र:'}</span>
+              </label>
+              <div className="relative">
+                <select
+                  value={selectedSector}
+                  onChange={(e) => setSelectedSector(e.target.value)}
+                  className="appearance-none pl-3.5 pr-8 py-2.5 rounded-xl text-xs sm:text-sm font-bold border border-slate-300 bg-white text-slate-800 shadow-2xs focus:border-[#D95F1A] focus:outline-none focus:ring-2 focus:ring-orange-100 transition-all cursor-pointer"
+                >
+                  <option value="all">
+                    {lang === 'en' ? 'All Categories / Sectors' : 'सर्व उद्योग क्षेत्रे (All Sectors)'}
+                  </option>
+                  {sectors
+                    .filter((s) => s !== 'all')
+                    .map((sec) => (
+                      <option key={sec} value={sec}>
+                        {localizeSector(sec, lang)}
+                      </option>
+                    ))}
+                </select>
+                <ChevronDown className="w-4 h-4 text-slate-500 absolute right-2.5 top-3 pointer-events-none" />
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
-      {/* Feed List (Very Compact Initial State, Click to Open) */}
+      {/* Feed List (Grid Showcase vs Clean List Like Udyog Samvad) */}
       {loading ? (
-        <div className="text-center py-12 text-xs text-slate-400">
+        <div className="text-center py-12 text-xs sm:text-sm text-slate-400">
           {lang === 'en'
             ? 'Loading B2B posts...'
             : lang === 'hi'
@@ -269,7 +309,7 @@ export const B2BSection: React.FC = () => {
             : 'B2B पोस्ट्स लोड होत आहेत...'}
         </div>
       ) : posts.length === 0 ? (
-        <div className="text-center py-12 bg-white rounded-2xl border border-slate-200 text-xs text-slate-500 p-6">
+        <div className="text-center py-12 bg-white rounded-2xl border border-slate-200 text-xs sm:text-sm text-slate-500 p-6">
           <ShoppingCart className="w-8 h-8 text-slate-300 mx-auto mb-2" />
           <p className="font-semibold text-slate-700">
             {lang === 'en'
@@ -292,7 +332,7 @@ export const B2BSection: React.FC = () => {
           </Button>
         </div>
       ) : (
-        <div className="space-y-3">
+        <div className={viewMode === 'grid' ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5" : "space-y-4"}>
           {posts.map((rawPost) => {
             const post = localizeB2BPost(rawPost, lang);
             const config = typeConfig[post.postType] || typeConfig.offer;
@@ -304,21 +344,20 @@ export const B2BSection: React.FC = () => {
               : null;
 
             return (
-              <Card
+              <div
                 key={post.id}
-                className={`transition-all duration-200 overflow-hidden ${
-                  isRequirement
-                    ? 'border-l-4 border-l-[#E35914] bg-white hover:border-slate-300'
-                    : 'border-l-4 border-l-[#136938] bg-white hover:border-slate-300'
-                }`}
+                className={`border bg-white rounded-2xl overflow-hidden shadow-xs hover:border-[#D95F1A]/70 hover:shadow-lg transition-all duration-300 flex flex-col justify-between ${
+                  isRequirement ? 'border-t-4 border-t-[#E35914]' : 'border-t-4 border-t-[#136938]'
+                } ${isExpanded ? 'ring-2 ring-[#D95F1A]/30' : ''}`}
               >
-                {/* COMPACT ROW: ONLY TITLE, BADGES, AND VIEW DETAILS BUTTON INITIALLY */}
+                {/* Clean Initial Card Face (Like Udyog Samvad Minimalist Aesthetic) */}
                 <div
-                  className="p-5 sm:p-6 cursor-pointer flex flex-col sm:flex-row sm:items-center justify-between gap-3.5 hover:bg-slate-50/50 transition-colors group"
                   onClick={() => toggleConversation(post.id)}
+                  className="p-5 flex-1 flex flex-col justify-between cursor-pointer group"
                 >
-                  <div className="flex-1 min-w-0">
-                    <div className="flex flex-wrap items-center gap-2 mb-2">
+                  <div>
+                    {/* Top Badges Row */}
+                    <div className="flex flex-wrap items-center gap-2 mb-3">
                       <span
                         className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold border ${config.bg} ${config.text}`}
                       >
@@ -335,21 +374,16 @@ export const B2BSection: React.FC = () => {
                       <span className="text-xs bg-slate-50 text-slate-700 px-2.5 py-1 rounded-lg font-semibold border border-slate-200">
                         {post.sector}
                       </span>
-
-                      <span className="text-xs text-slate-500 font-medium">
-                        {post.district} • {new Date(post.createdAt).toLocaleDateString(lang === 'en' ? 'en-IN' : 'mr-IN')}
-                      </span>
                     </div>
 
-                    {/* Single Line: Title as well as Supplier / Tender Name on One Line */}
-                    <div className="flex items-center gap-2 truncate">
-                      <span className="text-[15px] sm:text-base font-extrabold text-slate-900 group-hover:text-[#D95F1A] transition-colors truncate">
-                        {post.title}
-                      </span>
-                      <span className="text-slate-300 font-bold flex-shrink-0">•</span>
-                      <span className="text-xs sm:text-sm text-slate-600 font-semibold truncate flex-shrink-0">
-                        {post.authorName} ({post.authorBusinessName})
-                      </span>
+                    {/* Prominent, Legible Title */}
+                    <h3 className="text-[15px] sm:text-base font-extrabold text-slate-900 group-hover:text-[#D95F1A] transition-colors leading-snug line-clamp-2 mb-2">
+                      {post.title}
+                    </h3>
+
+                    {/* Single Line: Supplier / Tenderer Info */}
+                    <div className="flex items-center gap-2 text-xs sm:text-sm font-semibold text-slate-600 truncate">
+                      <span className="truncate">{post.authorName} ({post.authorBusinessName})</span>
                       {post.isOfficeBearer && (
                         <span className="flex-shrink-0">
                           <OfficeBearerBadge
@@ -361,28 +395,27 @@ export const B2BSection: React.FC = () => {
                     </div>
                   </div>
 
-                  {/* Actions: View Details / Close */}
-                  <div className="flex items-center gap-3 self-end sm:self-center flex-shrink-0">
-                    <span className="text-xs sm:text-sm text-slate-600 font-bold hidden md:inline-flex items-center gap-1.5 bg-slate-100 px-3 py-1.5 rounded-xl">
-                      <MessageSquare className="w-3.5 h-3.5 text-[#E35914]" />
-                      <span>{post.replies.length} {t('b2b', 'replyCount')}</span>
+                  {/* Bottom Bar: District/Date + Responses count + Action arrow */}
+                  <div className="border-t border-slate-100 pt-3 mt-4 flex items-center justify-between text-xs">
+                    <span className="text-xs text-slate-400">
+                      {post.district} • {new Date(post.createdAt).toLocaleDateString(lang === 'en' ? 'en-IN' : 'mr-IN')}
                     </span>
 
-                    <button
-                      type="button"
-                      className="px-4 py-2 sm:py-2.5 rounded-xl text-xs sm:text-sm font-bold border border-slate-200 bg-white hover:bg-slate-50 text-slate-800 flex items-center gap-1.5 shadow-2xs transition-colors"
-                    >
-                      <span>
-                        {isExpanded
-                          ? lang === 'en' ? 'Close Details' : 'तपशील बंद करा'
-                          : lang === 'en' ? 'View Details' : 'तपशील पहा'}
+                    <div className="flex items-center gap-2.5">
+                      <span className="text-xs text-slate-500 inline-flex items-center gap-1 bg-slate-100 px-2.5 py-1 rounded-lg font-semibold">
+                        <MessageSquare className="w-3.5 h-3.5 text-[#E35914]" />
+                        <span>{post.replies.length} {t('b2b', 'replyCount')}</span>
                       </span>
-                      {isExpanded ? (
-                        <ChevronUp className="w-4 h-4 text-slate-600" />
-                      ) : (
-                        <ChevronDown className="w-4 h-4 text-slate-600" />
-                      )}
-                    </button>
+
+                      <div className="flex items-center gap-1 font-bold text-[#D95F1A] text-xs group-hover:translate-x-1 transition-transform">
+                        <span>
+                          {isExpanded
+                            ? lang === 'en' ? 'Close' : 'बंद करा'
+                            : lang === 'en' ? 'Details' : 'तपशील'}
+                        </span>
+                        <ArrowRight className="w-3.5 h-3.5" />
+                      </div>
+                    </div>
                   </div>
                 </div>
 
@@ -512,7 +545,7 @@ export const B2BSection: React.FC = () => {
                     </div>
                   </div>
                 )}
-              </Card>
+              </div>
             );
           })}
         </div>
