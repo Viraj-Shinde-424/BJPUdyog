@@ -128,7 +128,7 @@ export default function RegisterPage() {
       <div className="min-h-screen flex flex-col bg-[#F8FAFC]">
         <Header />
 
-        <main className="flex-1 max-w-4xl xl:max-w-5xl 2xl:max-w-6xl w-full mx-auto px-4 sm:px-6 py-8 sm:py-12">
+        <main className="flex-1 max-w-4xl w-full mx-auto px-4 sm:px-6 py-8 sm:py-12">
           {registeredSuccess ? (
             <Card className="max-w-2xl mx-auto p-8 sm:p-12 text-center bg-white shadow-xl shadow-slate-200/50 rounded-3xl border border-slate-200 animate-fadeIn">
               <div className="w-20 h-20 bg-emerald-50 text-[#136938] rounded-3xl flex items-center justify-center mx-auto mb-5 border-2 border-emerald-200 shadow-sm">
@@ -206,12 +206,12 @@ export default function RegisterPage() {
               </div>
             </Card>
           ) : (
-            /* CENTERED REGISTRATION FORM (ENLARGED & GENEROUS PROPORTIONS) */
-            <div className="max-w-3xl xl:max-w-4xl 2xl:max-w-5xl mx-auto">
+            /* CENTERED REGISTRATION FORM ONLY (NO LEFT SIDE CONTENT) */
+            <div className="max-w-3xl xl:max-w-4xl mx-auto">
               {/* Form Title & Top Banner */}
-              <div className="text-center mb-10">
-                <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-orange-100 text-[#E35914] text-xs sm:text-sm font-bold border border-orange-200 mb-3.5 shadow-2xs">
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#E35914] animate-pulse" />
+              <div className="text-center mb-8">
+                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-orange-100 text-[#E35914] text-xs font-bold border border-orange-200 mb-3 shadow-2xs">
+                  <span className="w-2 h-2 rounded-full bg-[#E35914] animate-pulse" />
                   <span>
                     {lang === 'en'
                       ? 'Maharashtra Industry Coordination Desk'
@@ -220,14 +220,14 @@ export default function RegisterPage() {
                       : 'महाराष्ट्र उद्योग समन्वय मंच'}
                   </span>
                 </div>
-                <h1 className="text-2xl sm:text-4xl xl:text-5xl font-black text-slate-900 tracking-tight leading-tight">
+                <h1 className="text-2xl sm:text-4xl font-black text-slate-900 tracking-tight leading-tight">
                   {lang === 'en'
                     ? 'BJP Udyog Setu Member Registration'
                     : lang === 'hi'
                     ? 'भाजपा उद्योग सेतु सदस्यता पंजीकरण'
                     : 'भाजपा उद्योग सेतू सदस्य नोंदणी'}
                 </h1>
-                <p className="mt-3 text-sm sm:text-base xl:text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed">
+                <p className="mt-2 text-sm sm:text-base text-slate-600 max-w-xl mx-auto">
                   {lang === 'en'
                     ? 'Fill out the form in order below to join the state network as an Office-Bearer or Enterprise Owner.'
                     : lang === 'hi'
@@ -236,16 +236,16 @@ export default function RegisterPage() {
                 </p>
               </div>
 
-              {/* Form Card (Spacious & Comfortable Padding) */}
-              <Card className="p-7 sm:p-12 xl:p-14 bg-white shadow-xl shadow-slate-200/60 rounded-3xl border border-slate-200">
-                <form onSubmit={handleSubmit} className="space-y-10">
+              {/* Form Card */}
+              <Card className="p-6 sm:p-10 bg-white shadow-xl shadow-slate-200/60 rounded-3xl border border-slate-200">
+                <form onSubmit={handleSubmit} className="space-y-8">
                   {/* STEP 1: PERSONAL & CONTACT INFORMATION */}
-                  <div className="space-y-5">
-                    <div className="flex items-center gap-3 pb-3 border-b border-slate-200">
-                      <div className="w-9 h-9 rounded-xl bg-orange-100 text-[#E35914] flex items-center justify-center font-black text-base shadow-2xs">
+                  <div className="space-y-4">
+                    <div className="flex items-center gap-2 pb-2 border-b border-slate-200">
+                      <div className="w-7 h-7 rounded-lg bg-orange-50 text-[#E35914] flex items-center justify-center font-bold text-sm">
                         १
                       </div>
-                      <h2 className="text-lg sm:text-xl font-black text-slate-900">
+                      <h2 className="text-base sm:text-lg font-bold text-slate-900">
                         {lang === 'en'
                           ? 'Personal & Contact Details'
                           : lang === 'hi'
@@ -254,9 +254,9 @@ export default function RegisterPage() {
                       </h2>
                     </div>
 
-                    {/* Full Name */}
+                    {/* Full Name (FIRST FIELD AS REQUESTED) */}
                     <div>
-                      <label className="block text-sm sm:text-base font-extrabold text-slate-800 mb-2">
+                      <label className="block text-sm sm:text-base font-bold text-slate-800 mb-1.5">
                         {lang === 'en' ? 'Full Name' : lang === 'hi' ? 'पूरा नाम' : 'पूर्ण नाव'} <span className="text-red-500">*</span>
                       </label>
                       <input
@@ -269,71 +269,71 @@ export default function RegisterPage() {
                             ? 'e.g. Anand Prabhakar Kulkarni'
                             : 'उदा. आनंद प्रभाकर कुलकर्णी'
                         }
-                        className="w-full text-sm sm:text-base px-5 py-3.5 sm:py-4 rounded-2xl border border-slate-300 focus:border-[#E35914] focus:ring-2 focus:ring-orange-100 focus:outline-none bg-white font-medium shadow-2xs transition-all"
+                        className="w-full text-sm sm:text-base px-4 py-3 rounded-xl border border-slate-300 focus:border-[#E35914] focus:ring-2 focus:ring-orange-100 focus:outline-none bg-white font-medium shadow-2xs transition-all"
                       />
                     </div>
 
                     {/* Contact Numbers & Email */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div>
-                        <label className="block text-sm sm:text-base font-extrabold text-slate-800 mb-2">
+                        <label className="block text-sm sm:text-base font-bold text-slate-800 mb-1.5">
                           {lang === 'en' ? 'Mobile Number' : lang === 'hi' ? 'मोबाइल नंबर' : 'मोबाईल क्रमांक'} <span className="text-red-500">*</span>
                         </label>
                         <div className="relative">
-                          <Phone className="w-4 h-4 text-slate-400 absolute left-4 top-4 sm:top-4.5" />
+                          <Phone className="w-4 h-4 text-slate-400 absolute left-3.5 top-4" />
                           <input
                             type="tel"
                             required
                             value={phone}
                             onChange={(e) => setPhone(e.target.value)}
                             placeholder="+91 98220 11223"
-                            className="w-full text-sm sm:text-base pl-11 pr-5 py-3.5 sm:py-4 rounded-2xl border border-slate-300 focus:border-[#E35914] focus:ring-2 focus:ring-orange-100 focus:outline-none bg-white font-mono shadow-2xs transition-all"
+                            className="w-full text-sm sm:text-base pl-10 pr-4 py-3 rounded-xl border border-slate-300 focus:border-[#E35914] focus:ring-2 focus:ring-orange-100 focus:outline-none bg-white font-mono shadow-2xs transition-all"
                           />
                         </div>
                       </div>
 
                       <div>
-                        <label className="block text-sm sm:text-base font-extrabold text-slate-800 mb-2">
+                        <label className="block text-sm sm:text-base font-bold text-slate-800 mb-1.5">
                           {lang === 'en' ? 'WhatsApp Number' : lang === 'hi' ? 'व्हाट्सएप नंबर' : 'व्हॉट्सॲप क्रमांक'}
                         </label>
                         <div className="relative">
-                          <Phone className="w-4 h-4 text-emerald-600 absolute left-4 top-4 sm:top-4.5" />
+                          <Phone className="w-4 h-4 text-emerald-600 absolute left-3.5 top-4" />
                           <input
                             type="tel"
                             value={whatsappPhone}
                             onChange={(e) => setWhatsappPhone(e.target.value)}
                             placeholder="+91 98220 11223"
-                            className="w-full text-sm sm:text-base pl-11 pr-5 py-3.5 sm:py-4 rounded-2xl border border-slate-300 focus:border-[#136938] focus:ring-2 focus:ring-emerald-100 focus:outline-none bg-white font-mono shadow-2xs transition-all"
+                            className="w-full text-sm sm:text-base pl-10 pr-4 py-3 rounded-xl border border-slate-300 focus:border-[#136938] focus:ring-2 focus:ring-emerald-100 focus:outline-none bg-white font-mono shadow-2xs transition-all"
                           />
                         </div>
                       </div>
                     </div>
 
                     <div>
-                      <label className="block text-sm sm:text-base font-extrabold text-slate-800 mb-2">
+                      <label className="block text-sm sm:text-base font-bold text-slate-800 mb-1.5">
                         {lang === 'en' ? 'Email Address' : lang === 'hi' ? 'ईमेल आईडी' : 'ईमेल पत्ता'} <span className="text-red-500">*</span>
                       </label>
                       <div className="relative">
-                        <Mail className="w-4 h-4 text-slate-400 absolute left-4 top-4 sm:top-4.5" />
+                        <Mail className="w-4 h-4 text-slate-400 absolute left-3.5 top-4" />
                         <input
                           type="email"
                           required
                           value={email}
                           onChange={(e) => setEmail(e.target.value)}
                           placeholder="anand@kulkarnicastings.in"
-                          className="w-full text-sm sm:text-base pl-11 pr-5 py-3.5 sm:py-4 rounded-2xl border border-slate-300 focus:border-[#E35914] focus:ring-2 focus:ring-orange-100 focus:outline-none bg-white shadow-2xs transition-all"
+                          className="w-full text-sm sm:text-base pl-10 pr-4 py-3 rounded-xl border border-slate-300 focus:border-[#E35914] focus:ring-2 focus:ring-orange-100 focus:outline-none bg-white shadow-2xs transition-all"
                         />
                       </div>
                     </div>
                   </div>
 
                   {/* STEP 2: ROLE SELECTION FIELD (PADADHIKARI VS BUSINESS MEN RADIO) */}
-                  <div className="space-y-5 pt-3">
-                    <div className="flex items-center gap-3 pb-3 border-b border-slate-200">
-                      <div className="w-9 h-9 rounded-xl bg-orange-100 text-[#E35914] flex items-center justify-center font-black text-base shadow-2xs">
+                  <div className="space-y-4 pt-2">
+                    <div className="flex items-center gap-2 pb-2 border-b border-slate-200">
+                      <div className="w-7 h-7 rounded-lg bg-orange-50 text-[#E35914] flex items-center justify-center font-bold text-sm">
                         २
                       </div>
-                      <h2 className="text-lg sm:text-xl font-black text-slate-900">
+                      <h2 className="text-base sm:text-lg font-bold text-slate-900">
                         {lang === 'en'
                           ? 'Select Your Role'
                           : lang === 'hi'
@@ -342,16 +342,16 @@ export default function RegisterPage() {
                       </h2>
                     </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      {/* OPTION 1: PADADHIKARI */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                      {/* OPTION 1: PADADHIKARI (COMPACT SAME SIZE AS STAGE SELECTOR) */}
                       <label
-                        className={`p-4 sm:p-5 rounded-2xl border cursor-pointer flex items-center justify-between gap-3 transition-all ${
+                        className={`p-3.5 rounded-xl border cursor-pointer flex items-center justify-between gap-3 transition-all ${
                           registrantType === 'padadhikari'
-                            ? 'bg-white border-[#E35914] text-[#E35914] ring-2 ring-orange-100 font-bold shadow-xs'
-                            : 'bg-white/80 border-slate-200 text-slate-700 hover:border-slate-300'
+                            ? 'bg-white border-[#E35914] text-[#E35914] ring-2 ring-orange-100 font-bold shadow-2xs'
+                            : 'bg-white/70 border-slate-200 text-slate-700 hover:border-slate-300'
                         }`}
                       >
-                        <div className="flex items-center gap-3">
+                        <div className="flex items-center gap-2.5">
                           <input
                             type="radio"
                             name="registrantType"
@@ -360,7 +360,7 @@ export default function RegisterPage() {
                             onChange={() => setRegistrantType('padadhikari')}
                             className="w-4 h-4 text-[#E35914] focus:ring-[#E35914]"
                           />
-                          <span className="text-sm sm:text-base font-extrabold text-slate-900">
+                          <span className="text-sm font-bold text-slate-900">
                             {lang === 'en'
                               ? 'Office-Bearer (पदाधिकारी)'
                               : lang === 'hi'
@@ -368,20 +368,20 @@ export default function RegisterPage() {
                               : 'पदाधिकारी (Padadhikari)'}
                           </span>
                         </div>
-                        <span className="text-xs font-bold text-white bg-[#E35914] px-2.5 py-1 rounded-full flex-shrink-0">
+                        <span className="text-[10px] font-bold text-white bg-[#E35914] px-2 py-0.5 rounded-full flex-shrink-0">
                           {lang === 'en' ? 'Special' : 'विशेष नोंदणी'}
                         </span>
                       </label>
 
-                      {/* OPTION 2: BUSINESS MEN */}
+                      {/* OPTION 2: BUSINESS MEN (COMPACT SAME SIZE AS STAGE SELECTOR) */}
                       <label
-                        className={`p-4 sm:p-5 rounded-2xl border cursor-pointer flex items-center justify-between gap-3 transition-all ${
+                        className={`p-3.5 rounded-xl border cursor-pointer flex items-center justify-between gap-3 transition-all ${
                           registrantType === 'business'
-                            ? 'bg-white border-slate-900 text-slate-900 ring-2 ring-slate-200 font-bold shadow-xs'
-                            : 'bg-white/80 border-slate-200 text-slate-700 hover:border-slate-300'
+                            ? 'bg-white border-slate-900 text-slate-900 ring-2 ring-slate-200 font-bold shadow-2xs'
+                            : 'bg-white/70 border-slate-200 text-slate-700 hover:border-slate-300'
                         }`}
                       >
-                        <div className="flex items-center gap-3">
+                        <div className="flex items-center gap-2.5">
                           <input
                             type="radio"
                             name="registrantType"
@@ -390,7 +390,7 @@ export default function RegisterPage() {
                             onChange={() => setRegistrantType('business')}
                             className="w-4 h-4 text-slate-900 focus:ring-slate-900"
                           />
-                          <span className="text-sm sm:text-base font-extrabold text-slate-900">
+                          <span className="text-sm font-bold text-slate-900">
                             {lang === 'en'
                               ? 'Business Men / MSME'
                               : lang === 'hi'
@@ -398,7 +398,7 @@ export default function RegisterPage() {
                               : 'उद्योजक (Business Men)'}
                           </span>
                         </div>
-                        <span className="text-xs bg-slate-200 text-slate-800 font-bold px-2.5 py-1 rounded-full flex-shrink-0">
+                        <span className="text-[10px] bg-slate-200 text-slate-700 font-bold px-2 py-0.5 rounded-full flex-shrink-0">
                           MSME
                         </span>
                       </label>
@@ -406,8 +406,8 @@ export default function RegisterPage() {
 
                     {/* CONDITIONAL SUB-FIELDS FOR PADADHIKARI */}
                     {registrantType === 'padadhikari' && (
-                      <div className="bg-orange-50/80 border border-orange-200 p-6 rounded-2xl space-y-4 animate-fadeIn">
-                        <div className="flex items-center gap-2 font-bold text-sm sm:text-base text-orange-950">
+                      <div className="bg-orange-50/80 border border-orange-200 p-5 rounded-2xl space-y-4 animate-fadeIn">
+                        <div className="flex items-center gap-2 font-bold text-sm text-orange-950">
                           <ShieldCheck className="w-5 h-5 text-[#E35914]" />
                           <span>
                             {lang === 'en'
@@ -419,7 +419,7 @@ export default function RegisterPage() {
                         </div>
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                           <div>
-                            <label className="block text-xs sm:text-sm font-bold text-slate-800 mb-1.5">
+                            <label className="block text-xs sm:text-sm font-bold text-slate-800 mb-1">
                               {lang === 'en' ? 'Designation / Title *' : 'भाजप उद्योग आघाडी पदनाम *'}
                             </label>
                             <input
@@ -428,11 +428,11 @@ export default function RegisterPage() {
                               value={officeBearerTitle}
                               onChange={(e) => setOfficeBearerTitle(e.target.value)}
                               placeholder="उदा. जिल्हा संयोजक, तालुका अध्यक्ष..."
-                              className="w-full text-sm sm:text-base px-4 py-3 rounded-xl border border-orange-300 focus:border-[#E35914] focus:outline-none bg-white font-medium"
+                              className="w-full text-sm px-3.5 py-2.5 rounded-xl border border-orange-300 focus:border-[#E35914] focus:outline-none bg-white font-medium"
                             />
                           </div>
                           <div>
-                            <label className="block text-xs sm:text-sm font-bold text-slate-800 mb-1.5">
+                            <label className="block text-xs sm:text-sm font-bold text-slate-800 mb-1">
                               {lang === 'en' ? 'Organizational Scope *' : 'संघटनात्मक कार्यक्षेत्र (Scope) *'}
                             </label>
                             <input
@@ -441,7 +441,7 @@ export default function RegisterPage() {
                               value={officeBearerScope}
                               onChange={(e) => setOfficeBearerScope(e.target.value)}
                               placeholder="उदा. पुणे जिल्हा, चाकण क्लस्टर, महाराष्ट्र राज्य..."
-                              className="w-full text-sm sm:text-base px-4 py-3 rounded-xl border border-orange-300 focus:border-[#E35914] focus:outline-none bg-white font-medium"
+                              className="w-full text-sm px-3.5 py-2.5 rounded-xl border border-orange-300 focus:border-[#E35914] focus:outline-none bg-white font-medium"
                             />
                           </div>
                         </div>
@@ -450,7 +450,7 @@ export default function RegisterPage() {
 
                     {/* CONDITIONAL SUB-FIELDS FOR BUSINESS MEN (EXISTING VS ASPIRING) */}
                     {registrantType === 'business' && (
-                      <div className="bg-slate-50 border border-slate-200 p-6 rounded-2xl space-y-3.5 animate-fadeIn">
+                      <div className="bg-slate-50 border border-slate-200 p-5 rounded-2xl space-y-3 animate-fadeIn">
                         <label className="block text-xs sm:text-sm font-bold text-slate-800">
                           {lang === 'en'
                             ? 'Select Your Enterprise Stage *'
@@ -458,12 +458,12 @@ export default function RegisterPage() {
                             ? 'व्यवसाय का चरण चुनें *'
                             : 'आपल्या व्यवसायाचा टप्पा निवडा *'}
                         </label>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                           <label
-                            className={`p-4 rounded-xl border cursor-pointer flex items-center gap-3 transition-all ${
+                            className={`p-3.5 rounded-xl border cursor-pointer flex items-center gap-3 transition-all ${
                               businessStage === 'existing'
                                 ? 'bg-white border-[#136938] text-[#136938] ring-2 ring-emerald-100 font-bold shadow-2xs'
-                                : 'bg-white/80 border-slate-200 text-slate-700 hover:border-slate-300'
+                                : 'bg-white/70 border-slate-200 text-slate-700 hover:border-slate-300'
                             }`}
                           >
                             <input
@@ -474,7 +474,7 @@ export default function RegisterPage() {
                               onChange={() => setBusinessStage('existing')}
                               className="w-4 h-4 text-[#136938] focus:ring-[#136938]"
                             />
-                            <span className="text-sm sm:text-base font-semibold">
+                            <span className="text-sm">
                               {lang === 'en'
                                 ? 'Existing Enterprise'
                                 : lang === 'hi'
@@ -484,10 +484,10 @@ export default function RegisterPage() {
                           </label>
 
                           <label
-                            className={`p-4 rounded-xl border cursor-pointer flex items-center gap-3 transition-all ${
+                            className={`p-3.5 rounded-xl border cursor-pointer flex items-center gap-3 transition-all ${
                               businessStage === 'aspiring'
                                 ? 'bg-white border-[#E35914] text-[#E35914] ring-2 ring-orange-100 font-bold shadow-2xs'
-                                : 'bg-white/80 border-slate-200 text-slate-700 hover:border-slate-300'
+                                : 'bg-white/70 border-slate-200 text-slate-700 hover:border-slate-300'
                             }`}
                           >
                             <input
@@ -498,7 +498,7 @@ export default function RegisterPage() {
                               onChange={() => setBusinessStage('aspiring')}
                               className="w-4 h-4 text-[#E35914] focus:ring-[#E35914]"
                             />
-                            <span className="text-sm sm:text-base font-semibold">
+                            <span className="text-sm">
                               {lang === 'en'
                                 ? 'Aspiring (Starting New)'
                                 : lang === 'hi'
@@ -512,12 +512,12 @@ export default function RegisterPage() {
                   </div>
 
                   {/* STEP 3: BUSINESS & LOCATION DETAILS */}
-                  <div className="space-y-5 pt-3">
-                    <div className="flex items-center gap-3 pb-3 border-b border-slate-200">
-                      <div className="w-9 h-9 rounded-xl bg-orange-100 text-[#E35914] flex items-center justify-center font-black text-base shadow-2xs">
+                  <div className="space-y-4 pt-2">
+                    <div className="flex items-center gap-2 pb-2 border-b border-slate-200">
+                      <div className="w-7 h-7 rounded-lg bg-orange-50 text-[#E35914] flex items-center justify-center font-bold text-sm">
                         ३
                       </div>
-                      <h2 className="text-lg sm:text-xl font-black text-slate-900">
+                      <h2 className="text-base sm:text-lg font-bold text-slate-900">
                         {lang === 'en'
                           ? 'Enterprise & Location Details'
                           : lang === 'hi'
@@ -528,7 +528,7 @@ export default function RegisterPage() {
 
                     {/* Business Name */}
                     <div>
-                      <label className="block text-sm sm:text-base font-extrabold text-slate-800 mb-2">
+                      <label className="block text-sm sm:text-base font-bold text-slate-800 mb-1.5">
                         {businessStage === 'aspiring' && registrantType === 'business'
                           ? lang === 'en'
                             ? 'Proposed Enterprise / Venture Name *'
@@ -551,19 +551,19 @@ export default function RegisterPage() {
                             ? 'e.g. Kulkarni Castings Pvt Ltd'
                             : 'उदा. कुलकर्णी कास्टिंग्स प्रायव्हेट लिमिटेड'
                         }
-                        className="w-full text-sm sm:text-base px-5 py-3.5 sm:py-4 rounded-2xl border border-slate-300 focus:border-[#E35914] focus:outline-none bg-white font-medium shadow-2xs"
+                        className="w-full text-sm sm:text-base px-4 py-3 rounded-xl border border-slate-300 focus:border-[#E35914] focus:outline-none bg-white font-medium shadow-2xs"
                       />
                     </div>
 
                     {/* Industry Sector Dropdown */}
                     <div>
-                      <label className="block text-sm sm:text-base font-extrabold text-slate-800 mb-2">
+                      <label className="block text-sm sm:text-base font-bold text-slate-800 mb-1.5">
                         {lang === 'en' ? 'Industry Sector' : 'उद्योग क्षेत्र'} <span className="text-red-500">*</span>
                       </label>
                       <select
                         value={sector}
                         onChange={(e) => setSector(e.target.value)}
-                        className="w-full text-sm sm:text-base px-5 py-3.5 sm:py-4 rounded-2xl border border-slate-300 focus:border-[#E35914] focus:outline-none bg-white font-medium shadow-2xs cursor-pointer"
+                        className="w-full text-sm sm:text-base px-4 py-3 rounded-xl border border-slate-300 focus:border-[#E35914] focus:outline-none bg-white font-medium shadow-2xs"
                       >
                         <option value="Foundry & Metallurgy">फाउंड्री व धातू उद्योग (Foundry & Metallurgy)</option>
                         <option value="Auto & Engineering">ऑटोमोटिव्ह व इंजिनिअरिंग (Auto & Engineering)</option>
@@ -578,15 +578,15 @@ export default function RegisterPage() {
                     </div>
 
                     {/* District & Taluka */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div>
-                        <label className="block text-sm sm:text-base font-extrabold text-slate-800 mb-2">
+                        <label className="block text-sm sm:text-base font-bold text-slate-800 mb-1.5">
                           {lang === 'en' ? 'District' : lang === 'hi' ? 'जिला' : 'जिल्हा'} <span className="text-red-500">*</span>
                         </label>
                         <select
                           value={district}
                           onChange={(e) => setDistrict(e.target.value)}
-                          className="w-full text-sm sm:text-base px-5 py-3.5 sm:py-4 rounded-2xl border border-slate-300 focus:border-[#E35914] focus:outline-none bg-white font-medium shadow-2xs cursor-pointer"
+                          className="w-full text-sm sm:text-base px-4 py-3 rounded-xl border border-slate-300 focus:border-[#E35914] focus:outline-none bg-white font-medium shadow-2xs"
                         >
                           <option value="Pune">पुणे (Pune)</option>
                           <option value="Mumbai City">मुंबई शहर (Mumbai City)</option>
@@ -607,7 +607,7 @@ export default function RegisterPage() {
                       </div>
 
                       <div>
-                        <label className="block text-sm sm:text-base font-extrabold text-slate-800 mb-2">
+                        <label className="block text-sm sm:text-base font-bold text-slate-800 mb-1.5">
                           {lang === 'en' ? 'Taluka / Industrial MIDC Area' : 'तालुका / औद्योगिक वसाहत (MIDC)'} <span className="text-red-500">*</span>
                         </label>
                         <input
@@ -616,14 +616,14 @@ export default function RegisterPage() {
                           value={taluka}
                           onChange={(e) => setTaluka(e.target.value)}
                           placeholder="उदा. चाकण एमआयडीसी, हवेली, भोसरी..."
-                          className="w-full text-sm sm:text-base px-5 py-3.5 sm:py-4 rounded-2xl border border-slate-300 focus:border-[#E35914] focus:outline-none bg-white font-medium shadow-2xs"
+                          className="w-full text-sm sm:text-base px-4 py-3 rounded-xl border border-slate-300 focus:border-[#E35914] focus:outline-none bg-white font-medium shadow-2xs"
                         />
                       </div>
                     </div>
 
                     {/* Address & Description */}
                     <div>
-                      <label className="block text-sm sm:text-base font-extrabold text-slate-800 mb-2">
+                      <label className="block text-sm sm:text-base font-bold text-slate-800 mb-1.5">
                         {lang === 'en' ? 'Factory / Office Address' : 'कारखाना / कार्यालयाचा पूर्ण पत्ता'}
                       </label>
                       <input
@@ -631,12 +631,12 @@ export default function RegisterPage() {
                         value={address}
                         onChange={(e) => setAddress(e.target.value)}
                         placeholder="उदा. प्लॉट क्र. ई-४५, चाकण एमआयडीसी टप्पा २, पुणे"
-                        className="w-full text-sm sm:text-base px-5 py-3.5 sm:py-4 rounded-2xl border border-slate-300 focus:border-[#E35914] focus:outline-none bg-white font-medium shadow-2xs"
+                        className="w-full text-sm sm:text-base px-4 py-3 rounded-xl border border-slate-300 focus:border-[#E35914] focus:outline-none bg-white font-medium shadow-2xs"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-sm sm:text-base font-extrabold text-slate-800 mb-2">
+                      <label className="block text-sm sm:text-base font-bold text-slate-800 mb-1.5">
                         {lang === 'en' ? 'Business Profile & Products Summary' : 'मुख्य उत्पादने व व्यवसायाचे संक्षिप्त स्वरूप'}
                       </label>
                       <textarea
@@ -644,14 +644,14 @@ export default function RegisterPage() {
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
                         placeholder="उदा. एसजी व ग्रे आयर्न कास्टिंग्स, ऑटो कम्पोनंट्स आणि सीएनसी मशिनिंग क्षमता..."
-                        className="w-full text-sm sm:text-base px-5 py-3.5 sm:py-4 rounded-2xl border border-slate-300 focus:border-[#E35914] focus:outline-none bg-white font-medium shadow-2xs"
+                        className="w-full text-sm sm:text-base px-4 py-3 rounded-xl border border-slate-300 focus:border-[#E35914] focus:outline-none bg-white font-medium shadow-2xs"
                       />
                     </div>
                   </div>
 
                   {/* STEP 4: DIRECTORY CONSENT (OPT-IN) */}
-                  <div className="pt-3">
-                    <label className="flex items-start gap-4 p-5 rounded-2xl border border-slate-200 bg-slate-50 cursor-pointer hover:bg-slate-100/80 transition-colors">
+                  <div className="pt-2">
+                    <label className="flex items-start gap-3.5 p-4 rounded-2xl border border-slate-200 bg-slate-50 cursor-pointer hover:bg-slate-100/80 transition-colors">
                       <input
                         type="checkbox"
                         checked={optInDirectory}
@@ -664,7 +664,7 @@ export default function RegisterPage() {
                             ? 'Opt-in to Public Business Directory & Digital Card'
                             : 'सार्वजनिक उद्योग डिरेक्टरी व डिजिटल बिझनेस कार्डमध्ये सहभागी व्हा (Opt-in)'}
                         </span>
-                        <span className="text-xs sm:text-sm text-slate-500 leading-relaxed block mt-1">
+                        <span className="text-xs sm:text-sm text-slate-500 leading-relaxed block mt-0.5">
                           {lang === 'en'
                             ? 'Generate a verified digital visiting card and allow verified buyers & suppliers in Maharashtra to connect directly with your business.'
                             : 'आपले डिजिटल कार्ड तयार होईल आणि महाराष्ट्रातील इतर उद्योजक B2B पुरवठ्यासाठी आपल्याशी थेट संपर्क साधू शकतील.'}
@@ -680,7 +680,7 @@ export default function RegisterPage() {
                       variant="primary"
                       size="lg"
                       disabled={loading}
-                      className="w-full justify-center text-base sm:text-lg py-4 sm:py-4.5 font-black rounded-2xl shadow-md hover:shadow-lg transition-all"
+                      className="w-full justify-center text-base sm:text-lg py-4 font-bold rounded-2xl shadow-md hover:shadow-lg transition-all"
                       icon={<ArrowRight className="w-5 h-5" />}
                     >
                       {loading
