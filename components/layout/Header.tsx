@@ -12,7 +12,6 @@ import {
   Lock,
   LogOut,
   FileText,
-  CreditCard,
   Shield,
   SlidersHorizontal,
   UserPlus,
@@ -377,15 +376,6 @@ export const Header: React.FC = () => {
                         >
                           <FileText className="w-4 h-4 text-[#D95F1A]" />
                           <span>माझे अर्ज व तक्रारी (My Requests)</span>
-                        </Link>
-
-                        <Link
-                          href="/card/kulkarni-castings-pune"
-                          onClick={() => setAuthDropdownOpen(false)}
-                          className="px-4 py-2 hover:bg-emerald-50/50 flex items-center gap-2 text-slate-700 font-semibold transition-colors"
-                        >
-                          <CreditCard className="w-4 h-4 text-[#136938]" />
-                          <span>माझे डिजिटल व्हिजिटिंग कार्ड</span>
                         </Link>
 
                         {['admin', 'coordinator', 'office_bearer', 'state_office_bearer'].includes(
