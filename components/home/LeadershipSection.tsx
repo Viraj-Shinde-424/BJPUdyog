@@ -150,14 +150,14 @@ export const LeadershipSection: React.FC = () => {
               <div>
                 {/* Dignitary Profile Row */}
                 <div className="flex items-center gap-3.5 mb-4">
-                  {/* Circular Portrait with Prestige Rings */}
-                  <div className="relative w-16 h-16 rounded-full overflow-hidden border-2 border-orange-300 bg-[#D95F1A] p-0.5 shadow-xs flex-shrink-0 group-hover:scale-105 transition-transform">
+                  {/* Circular Portrait with Prestige Rings & Zero Clipping on Hover */}
+                  <div className="relative w-16 h-16 rounded-full overflow-hidden border-2 border-orange-300 group-hover:border-[#D95F1A] bg-orange-100 p-0.5 shadow-xs group-hover:shadow-md flex-shrink-0 transition-all duration-300">
                     <div className="relative w-full h-full rounded-full overflow-hidden">
                       <Image
                         src={leader.image}
                         alt={leader.name}
                         fill
-                        className="object-cover object-top"
+                        className="object-cover object-top transition-transform duration-300 group-hover:scale-110"
                         sizes="64px"
                         priority
                       />

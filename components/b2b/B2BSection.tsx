@@ -151,18 +151,18 @@ export const B2BSection: React.FC = () => {
 
   return (
     <div className="space-y-6">
-      {/* Header and Publish Action */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-white p-5 rounded-2xl border border-slate-200">
+      {/* Header and Publish Action (Identical to Samvad and Grievance Header Style) */}
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-white p-6 sm:p-7 rounded-2xl border border-slate-200 shadow-xs">
         <div>
-          <div className="flex items-center gap-2">
-            <h2 className="text-lg font-bold text-slate-900 leading-tight">
+          <div className="flex flex-wrap items-center gap-2.5">
+            <h2 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight leading-tight">
               {lang === 'en' ? 'B2B Business Network' : 'B2B उद्योग नेटवर्क'}
             </h2>
-            <span className="text-[11px] bg-orange-100 text-[#E35914] px-2 py-0.5 rounded-full font-bold">
+            <span className="text-xs bg-orange-100 text-[#D95F1A] px-3 py-1 rounded-full font-extrabold border border-orange-200">
               B2B Marketplace
             </span>
           </div>
-          <p className="text-xs text-slate-500 mt-0.5">
+          <p className="text-sm text-slate-600 font-medium mt-1.5 leading-relaxed max-w-3xl">
             {lang === 'en'
               ? 'Post material tenders or explore verified suppliers across Maharashtra industrial clusters.'
               : 'कच्च्या मालाच्या निविदा मांडा किंवा महाराष्ट्रातील अधिकृत पुरवठादार शोधा आणि थेट संपर्क साधा.'}
@@ -170,7 +170,8 @@ export const B2BSection: React.FC = () => {
         </div>
         <Button
           variant="primary"
-          size="sm"
+          size="md"
+          className="px-6 py-3 text-sm font-bold shadow-sm rounded-xl flex-shrink-0 bg-[#D95F1A] hover:bg-[#B84A0E]"
           icon={<Plus className="w-4 h-4" />}
           onClick={() => router.push('/b2b/post')}
         >
@@ -178,61 +179,71 @@ export const B2BSection: React.FC = () => {
         </Button>
       </div>
 
-      {/* Filter Bar with Combobox (Tenders vs Suppliers) */}
-      <div className="bg-white p-4 rounded-2xl border border-slate-200 space-y-3 shadow-xs">
-        <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3">
-          {/* Combobox Dropdown for Tenders and Suppliers (No Brackets, No Updates) */}
-          <div className="flex items-center gap-2.5">
-            <label className="text-xs font-bold text-slate-700 whitespace-nowrap flex items-center gap-1.5">
-              <Filter className="w-3.5 h-3.5 text-[#E35914]" />
-              <span>{lang === 'en' ? 'Filter by:' : 'निवडा:'}</span>
-            </label>
-            <select
-              value={selectedType}
-              onChange={(e) => setSelectedType(e.target.value)}
-              className="px-3.5 py-2 rounded-xl text-xs font-bold border border-slate-300 bg-white text-slate-800 shadow-2xs focus:border-[#E35914] focus:outline-none focus:ring-2 focus:ring-orange-100 transition-all cursor-pointer"
-            >
-              <option value="all">
-                {lang === 'en' ? 'All Posts' : 'सर्व पोस्ट्स'}
-              </option>
-              <option value="requirement">
-                {lang === 'en' ? 'Tenders' : 'निविदा'}
-              </option>
-              <option value="offer">
-                {lang === 'en' ? 'Suppliers' : 'पुरवठादार'}
-              </option>
-            </select>
-          </div>
-
-          {/* Search Box */}
-          <form onSubmit={handleSearchSubmit} className="relative flex-1 max-w-md">
-            <Search className="w-4 h-4 text-slate-400 absolute left-3 top-2.5" />
+      {/* 2. Top Filter & Search Bar (Harmonized with Samvad & Grievances) */}
+      <div className="bg-white p-5 sm:p-6 rounded-2xl border border-slate-200 space-y-4 shadow-xs">
+        {/* Row 1: Search input + Post count badge (TOP) */}
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pb-3 border-b border-slate-100">
+          <form onSubmit={handleSearchSubmit} className="relative flex-1 w-full">
+            <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-3.5" />
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder={
                 lang === 'en'
-                  ? 'Search by material, machinery or requirement...'
-                  : 'कच्चा माल, मशिनरी किंवा गरजेनुसार शोधा...'
+                  ? 'Search tenders, suppliers, raw materials or machinery...'
+                  : 'कच्चा माल, मशिनरी, निविदा किंवा पुरवठादार शोधा...'
               }
-              className="w-full text-xs pl-9 pr-3 py-2 rounded-xl border border-slate-200 focus:border-[#E35914] focus:outline-none bg-slate-50/50"
+              className="w-full text-xs sm:text-sm pl-10 pr-4 py-2.5 sm:py-3 rounded-xl border border-slate-300 focus:border-[#D95F1A] focus:ring-1 focus:ring-[#D95F1A]/20 focus:outline-none bg-slate-50/50 font-medium"
             />
           </form>
 
+          <div className="flex items-center justify-between sm:justify-end gap-2.5 w-full sm:w-auto">
+            <div className="text-xs sm:text-sm text-slate-700 font-bold whitespace-nowrap bg-slate-100 px-3.5 py-2 rounded-xl">
+              <span className="text-[#D95F1A] font-black">{posts.length}</span>{' '}
+              <span>{lang === 'en' ? 'posts available' : 'निविदा/पोस्ट्स उपलब्ध'}</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Row 2: Combobox Dropdown + Sector Filter Chips (BOTTOM) */}
+        <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3 pt-1">
+          {/* Combobox Dropdown for Tenders and Suppliers */}
+          <div className="flex items-center gap-2.5 flex-shrink-0">
+            <label className="text-xs sm:text-sm font-bold text-slate-700 whitespace-nowrap flex items-center gap-1.5">
+              <Filter className="w-4 h-4 text-[#D95F1A]" />
+              <span>{lang === 'en' ? 'Filter by:' : 'निवडा:'}</span>
+            </label>
+            <select
+              value={selectedType}
+              onChange={(e) => setSelectedType(e.target.value)}
+              className="px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold border border-slate-300 bg-white text-slate-800 shadow-2xs focus:border-[#D95F1A] focus:outline-none focus:ring-2 focus:ring-orange-100 transition-all cursor-pointer"
+            >
+              <option value="all">
+                {lang === 'en' ? 'All Posts' : 'सर्व पोस्ट्स'}
+              </option>
+              <option value="requirement">
+                {lang === 'en' ? 'Tenders' : 'निविदा (Requirements)'}
+              </option>
+              <option value="offer">
+                {lang === 'en' ? 'Suppliers' : 'पुरवठादार (Offers)'}
+              </option>
+            </select>
+          </div>
+
           {/* Sector Filter Chips */}
-          <div className="flex items-center gap-1.5 overflow-x-auto pb-1 md:pb-0 text-xs">
-            <span className="text-[11px] text-slate-400 font-semibold whitespace-nowrap pl-1">
+          <div className="flex items-center gap-2 overflow-x-auto no-scrollbar py-1 text-xs">
+            <span className="text-xs text-slate-500 font-bold whitespace-nowrap pl-1">
               {lang === 'en' ? 'Sector:' : 'क्षेत्र:'}
             </span>
             {sectors.map((sec) => (
               <button
                 key={sec}
                 onClick={() => setSelectedSector(sec)}
-                className={`px-2.5 py-1 rounded-lg text-[11px] font-medium whitespace-nowrap transition-all ${
+                className={`px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition-all ${
                   selectedSector === sec
-                    ? 'bg-[#E35914] text-white shadow-xs font-bold'
-                    : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                    ? 'bg-[#D95F1A] text-white shadow-xs font-bold'
+                    : 'bg-slate-100 text-slate-700 hover:bg-slate-200 border border-slate-200'
                 }`}
               >
                 {sec === 'all'
@@ -303,40 +314,40 @@ export const B2BSection: React.FC = () => {
               >
                 {/* COMPACT ROW: ONLY TITLE, BADGES, AND VIEW DETAILS BUTTON INITIALLY */}
                 <div
-                  className="p-4 sm:p-5 cursor-pointer flex flex-col sm:flex-row sm:items-center justify-between gap-3 hover:bg-slate-50/50 transition-colors"
+                  className="p-5 sm:p-6 cursor-pointer flex flex-col sm:flex-row sm:items-center justify-between gap-3.5 hover:bg-slate-50/50 transition-colors group"
                   onClick={() => toggleConversation(post.id)}
                 >
                   <div className="flex-1 min-w-0">
-                    <div className="flex flex-wrap items-center gap-2 mb-1.5">
+                    <div className="flex flex-wrap items-center gap-2 mb-2">
                       <span
-                        className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-bold border ${config.bg} ${config.text}`}
+                        className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold border ${config.bg} ${config.text}`}
                       >
                         <TypeIcon className="w-3.5 h-3.5" />
                         <span>{config.label}</span>
                       </span>
 
                       {resourceLabel && (
-                        <span className="text-[11px] bg-slate-100 text-slate-700 px-2 py-0.5 rounded font-medium border border-slate-200">
+                        <span className="text-xs bg-slate-100 text-slate-700 px-2.5 py-1 rounded-lg font-semibold border border-slate-200">
                           {resourceLabel}
                         </span>
                       )}
 
-                      <span className="text-[11px] bg-slate-50 text-slate-600 px-2 py-0.5 rounded font-medium border border-slate-200">
+                      <span className="text-xs bg-slate-50 text-slate-700 px-2.5 py-1 rounded-lg font-semibold border border-slate-200">
                         {post.sector}
                       </span>
 
-                      <span className="text-[11px] text-slate-400">
+                      <span className="text-xs text-slate-500 font-medium">
                         {post.district} • {new Date(post.createdAt).toLocaleDateString(lang === 'en' ? 'en-IN' : 'mr-IN')}
                       </span>
                     </div>
 
-                    {/* Single Line: Title as well as Supplier / Tendor Name on One Line */}
+                    {/* Single Line: Title as well as Supplier / Tender Name on One Line */}
                     <div className="flex items-center gap-2 truncate">
-                      <span className="text-xs sm:text-sm font-bold text-slate-900 hover:text-[#E35914] transition-colors truncate">
+                      <span className="text-[15px] sm:text-base font-extrabold text-slate-900 group-hover:text-[#D95F1A] transition-colors truncate">
                         {post.title}
                       </span>
-                      <span className="text-slate-400 font-normal flex-shrink-0">•</span>
-                      <span className="text-xs text-slate-600 font-medium truncate flex-shrink-0">
+                      <span className="text-slate-300 font-bold flex-shrink-0">•</span>
+                      <span className="text-xs sm:text-sm text-slate-600 font-semibold truncate flex-shrink-0">
                         {post.authorName} ({post.authorBusinessName})
                       </span>
                       {post.isOfficeBearer && (
@@ -352,14 +363,14 @@ export const B2BSection: React.FC = () => {
 
                   {/* Actions: View Details / Close */}
                   <div className="flex items-center gap-3 self-end sm:self-center flex-shrink-0">
-                    <span className="text-xs text-slate-500 hidden md:inline-flex items-center gap-1 bg-slate-100 px-2.5 py-1 rounded-lg">
+                    <span className="text-xs sm:text-sm text-slate-600 font-bold hidden md:inline-flex items-center gap-1.5 bg-slate-100 px-3 py-1.5 rounded-xl">
                       <MessageSquare className="w-3.5 h-3.5 text-[#E35914]" />
                       <span>{post.replies.length} {t('b2b', 'replyCount')}</span>
                     </span>
 
                     <button
                       type="button"
-                      className="px-3.5 py-2 rounded-xl text-xs font-bold border border-slate-200 bg-white hover:bg-slate-100 text-slate-800 flex items-center gap-1.5 shadow-2xs transition-colors"
+                      className="px-4 py-2 sm:py-2.5 rounded-xl text-xs sm:text-sm font-bold border border-slate-200 bg-white hover:bg-slate-50 text-slate-800 flex items-center gap-1.5 shadow-2xs transition-colors"
                     >
                       <span>
                         {isExpanded

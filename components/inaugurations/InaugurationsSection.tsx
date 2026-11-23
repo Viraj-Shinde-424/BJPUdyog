@@ -121,26 +121,26 @@ export const InaugurationsSection: React.FC = () => {
 
                     {/* Status Badge */}
                     {isAccepted && (
-                      <span className="inline-flex items-center gap-1 text-[11px] font-bold text-[#136938] bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full">
+                      <span className="inline-flex items-center gap-1.5 text-xs font-bold text-[#136938] bg-emerald-50 border border-emerald-200 px-3 py-1 rounded-full">
                         <CheckCircle2 className="w-3.5 h-3.5" />
                         <span>{t('inauguration', 'statusAccepted')}</span>
                       </span>
                     )}
                     {isDeclined && (
-                      <span className="inline-flex items-center gap-1 text-[11px] font-bold text-rose-700 bg-rose-50 border border-rose-200 px-2 py-0.5 rounded-full">
+                      <span className="inline-flex items-center gap-1.5 text-xs font-bold text-rose-700 bg-rose-50 border border-rose-200 px-3 py-1 rounded-full">
                         <XCircle className="w-3.5 h-3.5" />
                         <span>{t('inauguration', 'statusDeclined')}</span>
                       </span>
                     )}
                     {isPending && (
-                      <span className="inline-flex items-center gap-1 text-[11px] font-bold text-amber-800 bg-amber-50 border border-amber-200 px-2 py-0.5 rounded-full">
+                      <span className="inline-flex items-center gap-1.5 text-xs font-bold text-amber-800 bg-amber-50 border border-amber-200 px-3 py-1 rounded-full">
                         <AlertCircle className="w-3.5 h-3.5 text-[#F59E0B]" />
                         <span>{t('inauguration', 'statusPending')}</span>
                       </span>
                     )}
                   </div>
 
-                  <h3 className="font-bold text-sm text-slate-900 leading-snug mb-1">
+                  <h3 className="font-bold text-sm sm:text-base text-slate-900 leading-snug mb-1">
                     {inv.businessName}
                   </h3>
 

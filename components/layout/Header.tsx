@@ -229,29 +229,29 @@ export const Header: React.FC = () => {
           {/* DIGNITARIES STRIP & DESKTOP LANGUAGE SELECTOR */}
           <div className="w-full lg:w-auto flex items-center justify-between lg:justify-end gap-3 sm:gap-6">
             {/* The 3 Distinguished Leaders */}
-            <div className="w-full lg:w-auto flex items-center justify-between sm:justify-center lg:justify-end gap-2.5 sm:gap-4 xl:gap-6 overflow-x-auto no-scrollbar py-0.5">
+            <div className="w-full lg:w-auto flex items-center justify-between sm:justify-center lg:justify-end gap-3 sm:gap-4 xl:gap-6 overflow-x-auto lg:overflow-visible no-scrollbar py-2 sm:py-2.5 px-1">
               {leaders.map((leader) => (
                 <div
                   key={leader.key}
-                  className="flex items-center gap-2 sm:gap-3 group cursor-default flex-shrink-0"
+                  className="flex items-center gap-2.5 sm:gap-3 group cursor-default flex-shrink-0"
                 >
-                  {/* Noticeably Enlarged & Crisp Portrait */}
-                  <div className="relative w-10 h-10 sm:w-11 sm:h-11 xl:w-12 xl:h-12 2xl:w-13 2xl:h-13 rounded-full overflow-hidden ring-2 ring-orange-400/80 shadow-md bg-orange-100 border-2 border-white flex-shrink-0 group-hover:scale-105 group-hover:ring-orange-500 transition-all duration-200">
+                  {/* Noticeably Enlarged & Crisp Portrait with Zero Clipping on Hover */}
+                  <div className="relative w-11 h-11 sm:w-12 sm:h-12 xl:w-14 xl:h-14 rounded-full ring-2 ring-orange-400 shadow-sm bg-orange-100 border-2 border-white flex-shrink-0 group-hover:ring-[#D95F1A] group-hover:shadow-md transition-all duration-300 overflow-hidden">
                     <Image
                       src={leader.image}
                       alt={leader.name}
                       fill
-                      className="object-cover object-top"
-                      sizes="(max-width: 640px) 44px, (max-width: 1440px) 50px, 56px"
+                      className="object-cover object-top transition-transform duration-300 group-hover:scale-110"
+                      sizes="(max-width: 640px) 48px, 64px"
                       priority
                     />
                   </div>
                   {/* Prominent & Legible Typography */}
                   <div className="flex flex-col text-left">
-                    <span className="font-black text-[11px] sm:text-xs xl:text-[13px] 2xl:text-[13.5px] text-slate-900 leading-tight group-hover:text-[#D95F1A] transition-colors whitespace-nowrap">
+                    <span className="font-black text-xs sm:text-[13px] xl:text-[14px] 2xl:text-[14.5px] text-slate-900 leading-tight group-hover:text-[#D95F1A] transition-colors whitespace-nowrap">
                       {leader.name}
                     </span>
-                    <span className="text-[9px] sm:text-[10px] xl:text-[11px] font-bold text-[#D95F1A] leading-tight mt-0.5 whitespace-nowrap">
+                    <span className="text-[10px] sm:text-[11px] xl:text-[11.5px] font-bold text-[#D95F1A] leading-tight mt-0.5 whitespace-nowrap">
                       {leader.role}
                     </span>
                   </div>

@@ -290,7 +290,7 @@ export const GrievanceSection: React.FC = () => {
                       {g.trackingId}
                     </span>
                     <span
-                      className={`text-[10px] font-bold px-2 py-0.5 rounded-full border ${
+                      className={`text-xs font-bold px-2.5 py-1 rounded-full border ${
                         g.status === 'referred_to_state'
                           ? 'bg-purple-50 text-purple-700 border-purple-200'
                           : g.status === 'under_review'
@@ -302,20 +302,20 @@ export const GrievanceSection: React.FC = () => {
                     </span>
                   </div>
 
-                  <div className="flex items-center gap-1.5 mb-1">
-                    <span className={`inline-flex items-center gap-1 text-[10px] font-semibold px-2 py-0.2 rounded border ${typeInfo.bg} ${typeInfo.text}`}>
-                      <TypeIcon className="w-2.5 h-2.5" />
+                  <div className="flex items-center gap-1.5 mb-1.5">
+                    <span className={`inline-flex items-center gap-1.5 text-xs font-semibold px-2.5 py-0.5 rounded-md border ${typeInfo.bg} ${typeInfo.text}`}>
+                      <TypeIcon className="w-3 h-3" />
                       <span>{typeInfo.label}</span>
                     </span>
                   </div>
 
-                  <h4 className="font-bold text-xs text-slate-900 line-clamp-1 mb-1">
+                  <h4 className="font-bold text-sm sm:text-base text-slate-900 line-clamp-1 mb-1">
                     {g.subject || g.businessName}
                   </h4>
-                  <p className="text-[11px] text-slate-500 line-clamp-2">
+                  <p className="text-xs sm:text-sm text-slate-600 line-clamp-2 leading-relaxed">
                     {g.explanation}
                   </p>
-                  <div className="mt-2 text-[10px] text-slate-400">
+                  <div className="mt-2 text-xs text-slate-400">
                     {g.district} • {new Date(g.createdAt).toLocaleDateString()}
                   </div>
                 </div>

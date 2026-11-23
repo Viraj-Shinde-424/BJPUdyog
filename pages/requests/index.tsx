@@ -46,21 +46,21 @@ export default function RequestsPage() {
       case 'approved':
       case 'scheduled':
         return (
-          <span className="inline-flex items-center gap-1 text-[11px] font-bold text-[#136938] bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 rounded-full">
+          <span className="inline-flex items-center gap-1.5 text-xs font-bold text-[#136938] bg-emerald-50 border border-emerald-200 px-3 py-1 rounded-full">
             <CheckCircle2 className="w-3.5 h-3.5" />
             <span>स्वीकारले (Approved / Scheduled)</span>
           </span>
         );
       case 'declined':
         return (
-          <span className="inline-flex items-center gap-1 text-[11px] font-bold text-rose-700 bg-rose-50 border border-rose-200 px-2.5 py-0.5 rounded-full">
+          <span className="inline-flex items-center gap-1.5 text-xs font-bold text-rose-700 bg-rose-50 border border-rose-200 px-3 py-1 rounded-full">
             <XCircle className="w-3.5 h-3.5" />
             <span>नाकारले (Declined)</span>
           </span>
         );
       default:
         return (
-          <span className="inline-flex items-center gap-1 text-[11px] font-bold text-amber-800 bg-amber-50 border border-amber-300 px-2.5 py-0.5 rounded-full">
+          <span className="inline-flex items-center gap-1.5 text-xs font-bold text-amber-800 bg-amber-50 border border-amber-300 px-3 py-1 rounded-full">
             <Clock className="w-3.5 h-3.5 text-[#F59E0B]" />
             <span>प्रलंबित (Pending Review)</span>
           </span>
