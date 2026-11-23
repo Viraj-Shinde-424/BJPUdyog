@@ -474,33 +474,33 @@ export const GrievanceSection: React.FC = () => {
                 </div>
               )}
 
-              {/* Strict Private Timeline (Restricted to owner & authorized staff) */}
-              <div className="pt-4 border-t border-slate-200">
-                <div className="flex items-center justify-between mb-3">
+              {/* Strict Private Timeline (Restricted to owner & authorized staff - Enlarged Font Harmonized) */}
+              <div className="pt-5 border-t border-slate-200">
+                <div className="flex items-center justify-between mb-3.5">
                   <div className="flex items-center gap-2">
-                    <Clock className="w-4 h-4 text-[#E35914]" />
-                    <h4 className="font-bold text-xs text-slate-900">
+                    <Clock className="w-5 h-5 text-[#E35914]" />
+                    <h4 className="font-extrabold text-sm sm:text-base text-slate-900">
                       {t('grievances', 'timelineTitle')}
                     </h4>
                   </div>
-                  <span className="text-[11px] text-slate-400 flex items-center gap-1">
-                    <Lock className="w-3 h-3" />
+                  <span className="text-xs font-bold text-slate-500 bg-slate-100 px-3 py-1 rounded-full border border-slate-200 flex items-center gap-1.5">
+                    <Lock className="w-3.5 h-3.5 text-slate-600" />
                     <span>{lang === 'en' ? 'Confidential' : lang === 'hi' ? 'गोपनीय' : 'गोपनीय'}</span>
                   </span>
                 </div>
 
                 {/* Privacy Restriction Banner */}
                 {isRestrictedView ? (
-                  <div className="bg-amber-50 border border-amber-200 p-4 rounded-xl text-xs text-amber-900 flex items-start gap-2.5">
+                  <div className="bg-amber-50 border border-amber-200 p-4 rounded-xl text-xs sm:text-sm text-amber-900 flex items-start gap-2.5">
                     <Lock className="w-4 h-4 text-amber-700 flex-shrink-0 mt-0.5" />
                     <div>
-                      <div className="font-bold mb-1">
+                      <div className="font-bold text-sm sm:text-base mb-1">
                         {lang === 'en' ? 'Restricted Access' : lang === 'hi' ? 'सीमित पहुंच (Restricted Access)' : 'प्रवेश मर्यादित (Restricted Access)'}
                       </div>
                       <p className="leading-relaxed">
                         {t('grievances', 'privacyNotice')}
                       </p>
-                      <p className="mt-1 text-[11px] text-amber-700">
+                      <p className="mt-1.5 text-xs text-amber-800 font-medium">
                         {lang === 'en'
                           ? 'Please sign in with the original business owner or authorized staff account to inspect the confidential resolution notes.'
                           : lang === 'hi'
@@ -510,23 +510,23 @@ export const GrievanceSection: React.FC = () => {
                     </div>
                   </div>
                 ) : (
-                  <div className="space-y-3">
+                  <div className="space-y-4">
                     {/* Security Notice for authorized viewers */}
-                    <div className="bg-slate-50 border border-slate-200 p-2.5 rounded-lg text-[11px] text-slate-600 flex items-center gap-2">
+                    <div className="bg-slate-50 border border-slate-200 p-3 rounded-xl text-xs sm:text-sm text-slate-700 font-medium flex items-center gap-2">
                       <ShieldCheck className="w-4 h-4 text-[#136938] flex-shrink-0" />
                       <span>{t('grievances', 'privacyNotice')}</span>
                     </div>
 
-                    {/* Timeline items */}
-                    <div className="border-l-2 border-slate-200 ml-3 pl-4 space-y-4 py-2">
+                    {/* Timeline items (Generous, Legible Fonts Matching Explanation) */}
+                    <div className="border-l-2 border-slate-200 ml-3.5 pl-4 sm:pl-5 space-y-4 py-2">
                       {activeGrievance.updates.map((up) => (
                         <div key={up.id} className="relative">
-                          <div className="absolute -left-[21px] top-1 w-2.5 h-2.5 rounded-full bg-[#E35914] border-2 border-white ring-2 ring-orange-100" />
-                          <div className="flex items-center justify-between text-[11px] text-slate-500 mb-1">
-                            <span className="font-bold text-slate-800">{up.authorName}</span>
+                          <div className="absolute -left-[23px] sm:-left-[27px] top-1.5 w-3 h-3 rounded-full bg-[#E35914] border-2 border-white ring-2 ring-orange-200" />
+                          <div className="flex items-center justify-between text-xs sm:text-sm text-slate-600 mb-1.5 font-semibold">
+                            <span className="font-extrabold text-sm sm:text-base text-slate-900">{up.authorName}</span>
                             <span>{new Date(up.createdAt).toLocaleString()}</span>
                           </div>
-                          <p className="text-xs text-slate-700 bg-slate-50 p-2.5 rounded-lg border border-slate-200 leading-relaxed">
+                          <p className="text-sm sm:text-base text-slate-700 bg-slate-50 p-3.5 sm:p-4 rounded-xl border border-slate-200 leading-relaxed font-normal">
                             {up.updateNotes}
                           </p>
                         </div>
@@ -534,7 +534,7 @@ export const GrievanceSection: React.FC = () => {
                     </div>
 
                     {/* Add Update Box for Staff / Owner */}
-                    <div className="flex items-center gap-2 pt-2">
+                    <div className="flex items-center gap-2.5 pt-2">
                       <input
                         type="text"
                         value={updateText}
@@ -549,13 +549,14 @@ export const GrievanceSection: React.FC = () => {
                             ? 'शिकायत फॉलो-अप पर नई टिप्पणी / स्थिति दर्ज करें...'
                             : 'तक्रारीच्या पाठपुराव्याची नवीन स्थिती / शेरा लिहा...'
                         }
-                        className="w-full text-xs px-3 py-2 rounded-lg border border-slate-300 focus:border-[#E35914] focus:outline-none"
+                        className="w-full text-xs sm:text-sm px-4 py-3 rounded-xl border border-slate-300 focus:border-[#E35914] focus:outline-none bg-white font-medium"
                       />
                       <Button
                         variant="primary"
-                        size="sm"
+                        size="md"
                         onClick={handleAddUpdate}
-                        icon={<Send className="w-3.5 h-3.5" />}
+                        className="px-5 py-3 text-xs sm:text-sm font-bold shadow-xs rounded-xl flex-shrink-0"
+                        icon={<Send className="w-4 h-4" />}
                       >
                         {t('grievances', 'addUpdateBtn')}
                       </Button>

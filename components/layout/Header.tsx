@@ -197,25 +197,25 @@ export const Header: React.FC = () => {
       {/* 1. TOP HAIRLINE TRICOLOR ACCENT */}
       <div className="h-[3px] bg-gradient-to-r from-[#D95F1A] via-amber-400 to-[#136938] w-full" />
 
-      {/* 2. OFFICIAL EXECUTIVE MASTHEAD & DIGNITARIES BAR */}
-      <div className="bg-[#FAF7F2] border-b border-[#EDE6D8] px-3 sm:px-6 lg:px-8 xl:px-10 py-2 sm:py-2.5 xl:py-3 transition-colors">
-        <div className="max-w-[1440px] 2xl:max-w-[1600px] mx-auto flex flex-col lg:flex-row items-center justify-between gap-2.5 sm:gap-3 lg:gap-6">
+      {/* 2. OFFICIAL EXECUTIVE MASTHEAD & DIGNITARIES BAR (Sleek Compact Height) */}
+      <div className="bg-[#FAF7F2] border-b border-[#EDE6D8] px-3 sm:px-6 lg:px-8 xl:px-10 py-1 sm:py-1.5 transition-colors">
+        <div className="max-w-[1440px] 2xl:max-w-[1600px] mx-auto flex flex-col lg:flex-row items-center justify-between gap-1.5 sm:gap-2 lg:gap-4">
           
           {/* TOP ON MOBILE / LEFT ON DESKTOP: Government Seal & Mobile Language Switcher */}
-          <div className="w-full lg:w-auto flex items-center justify-between gap-2 text-xs sm:text-[13px] text-slate-800">
+          <div className="w-full lg:w-auto flex items-center justify-between gap-2 text-xs sm:text-[12.5px] text-slate-800">
             <div className="flex items-center gap-2 min-w-0">
-              <span className="flex h-2.5 w-2.5 relative flex-shrink-0">
+              <span className="flex h-2 w-2 relative flex-shrink-0">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-600" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-600" />
               </span>
-              <span className="font-extrabold text-slate-900 tracking-tight text-[11px] sm:text-xs md:text-[13px] truncate">
+              <span className="font-extrabold text-slate-900 tracking-tight text-[11px] sm:text-xs md:text-[12.5px] truncate">
                 {lang === 'en'
                   ? 'Government of Maharashtra • BJP Udyog Aghadi Official Portal'
                   : lang === 'hi'
                   ? 'महाराष्ट्र शासन • भाजपा उद्योग अघाड़ी आधिकारिक मंच'
                   : 'महाराष्ट्र शासन • भाजप उद्योग आघाडी अधिकृत मंच'}
               </span>
-              <span className="hidden xl:inline-block text-[11px] bg-emerald-100/90 text-emerald-900 border border-emerald-300 px-2.5 py-0.5 rounded-full font-bold shadow-2xs whitespace-nowrap">
+              <span className="hidden xl:inline-block text-[10.5px] bg-emerald-100/90 text-emerald-900 border border-emerald-300 px-2 py-0.5 rounded-full font-bold shadow-2xs whitespace-nowrap">
                 ● {lang === 'en' ? 'Verified State Portal' : 'अधिकृत डिजिटल सेतू'}
               </span>
             </div>
@@ -226,32 +226,32 @@ export const Header: React.FC = () => {
             </div>
           </div>
 
-          {/* DIGNITARIES STRIP & DESKTOP LANGUAGE SELECTOR */}
-          <div className="w-full lg:w-auto flex items-center justify-between lg:justify-end gap-3 sm:gap-6">
+          {/* DIGNITARIES STRIP & DESKTOP LANGUAGE SELECTOR (Proportionally Scaled Down) */}
+          <div className="w-full lg:w-auto flex items-center justify-between lg:justify-end gap-2.5 sm:gap-4">
             {/* The 3 Distinguished Leaders */}
-            <div className="w-full lg:w-auto flex items-center justify-between sm:justify-center lg:justify-end gap-3 sm:gap-4 xl:gap-6 overflow-x-auto lg:overflow-visible no-scrollbar py-2 sm:py-2.5 px-1">
+            <div className="w-full lg:w-auto flex items-center justify-between sm:justify-center lg:justify-end gap-2.5 sm:gap-3.5 xl:gap-5 overflow-x-auto lg:overflow-visible no-scrollbar py-0.5 px-0.5">
               {leaders.map((leader) => (
                 <div
                   key={leader.key}
-                  className="flex items-center gap-2.5 sm:gap-3 group cursor-default flex-shrink-0"
+                  className="flex items-center gap-2 sm:gap-2.5 group cursor-default flex-shrink-0"
                 >
-                  {/* Noticeably Enlarged & Crisp Portrait with Zero Clipping on Hover */}
-                  <div className="relative w-11 h-11 sm:w-12 sm:h-12 xl:w-14 xl:h-14 rounded-full ring-2 ring-orange-400 shadow-sm bg-orange-100 border-2 border-white flex-shrink-0 group-hover:ring-[#D95F1A] group-hover:shadow-md transition-all duration-300 overflow-hidden">
+                  {/* Sleek Compact Portrait */}
+                  <div className="relative w-8.5 h-8.5 sm:w-9.5 sm:h-9.5 xl:w-10.5 xl:h-10.5 rounded-full ring-2 ring-orange-400 shadow-2xs bg-orange-100 border border-white flex-shrink-0 group-hover:ring-[#D95F1A] transition-all duration-300 overflow-hidden">
                     <Image
                       src={leader.image}
                       alt={leader.name}
                       fill
                       className="object-cover object-top transition-transform duration-300 group-hover:scale-110"
-                      sizes="(max-width: 640px) 48px, 64px"
+                      sizes="(max-width: 640px) 38px, 46px"
                       priority
                     />
                   </div>
-                  {/* Prominent & Legible Typography */}
+                  {/* Scaled Crisp Typography */}
                   <div className="flex flex-col text-left">
-                    <span className="font-black text-xs sm:text-[13px] xl:text-[14px] 2xl:text-[14.5px] text-slate-900 leading-tight group-hover:text-[#D95F1A] transition-colors whitespace-nowrap">
+                    <span className="font-black text-[11px] sm:text-xs xl:text-[13px] text-slate-900 leading-tight group-hover:text-[#D95F1A] transition-colors whitespace-nowrap">
                       {leader.name}
                     </span>
-                    <span className="text-[10px] sm:text-[11px] xl:text-[11.5px] font-bold text-[#D95F1A] leading-tight mt-0.5 whitespace-nowrap">
+                    <span className="text-[9px] sm:text-[10px] xl:text-[10.5px] font-bold text-[#D95F1A] leading-tight mt-0.5 whitespace-nowrap">
                       {leader.role}
                     </span>
                   </div>
@@ -260,8 +260,8 @@ export const Header: React.FC = () => {
             </div>
 
             {/* Desktop Language Switcher */}
-            <div className="hidden lg:flex items-center gap-3">
-              <div className="h-8 w-px bg-slate-300" />
+            <div className="hidden lg:flex items-center gap-2.5">
+              <div className="h-6 w-px bg-slate-300" />
               <LanguageSwitcher />
             </div>
           </div>
