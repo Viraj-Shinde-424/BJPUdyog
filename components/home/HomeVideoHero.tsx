@@ -12,7 +12,7 @@ export const HomeVideoHero: React.FC = () => {
         muted
         loop
         playsInline
-        preload="auto"
+        preload="metadata"
         className="absolute inset-0 w-full h-full object-cover z-0"
       >
         <source src="/videos/bjp-udyog-horizontal.mp4" type="video/mp4; codecs=avc1.640029, mp4a.40.2" />

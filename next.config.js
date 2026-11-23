@@ -19,19 +19,22 @@ const nextConfig = {
   async headers() {
     return [
       {
-        source: '/((?!_next/static|_next/image|favicon.ico|images|videos).*)',
+        // API routes — always fresh
+        source: '/api/:path*',
         headers: [
           {
             key: 'Cache-Control',
             value: 'no-cache, no-store, must-revalidate',
           },
+        ],
+      },
+      {
+        // Pages — allow short browser cache with revalidation for fast repeat loads
+        source: '/((?!_next/static|_next/image|favicon.ico|images|videos|api).*)',
+        headers: [
           {
-            key: 'Pragma',
-            value: 'no-cache',
-          },
-          {
-            key: 'Expires',
-            value: '0',
+            key: 'Cache-Control',
+            value: 'public, max-age=60, s-maxage=300, stale-while-revalidate=600',
           },
         ],
       },

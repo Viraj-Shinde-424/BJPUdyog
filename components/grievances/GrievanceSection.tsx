@@ -60,18 +60,24 @@ export const GrievanceSection: React.FC = () => {
     }
     setLoading(true);
     try {
+      // Personal mode: always fetch as business_owner (only own cases)
+      // Padadhikari mode: fetch as staff role (all district cases) if authorized
       const roleParam =
         grievanceMode === 'padadhikari' && isStaffUser
           ? currentUser.role || 'office_bearer'
           : 'business_owner';
 
-      const res = await fetch(`/api/grievances?userId=${currentUser.id}&role=${roleParam}`);
+      const res = await fetch(`/api/grievances?userId=${currentUser.id}&role=${roleParam}&mode=${grievanceMode}`);
       const data = await res.json();
       if (data.grievances) {
-        setGrievances(data.grievances);
+        // For padadhikari mode, exclude the staff user's own grievances (show only others' cases to manage)
+        const filtered = grievanceMode === 'padadhikari' && isStaffUser
+          ? data.grievances.filter((g: any) => g.ownerId !== currentUser.id)
+          : data.grievances;
+        setGrievances(filtered);
         // Only auto-select first in padadhikari mode when logged in as staff and none is active
-        if (grievanceMode === 'padadhikari' && isStaffUser && data.grievances.length > 0 && !activeGrievance) {
-          loadGrievanceDetails(data.grievances[0].trackingId);
+        if (grievanceMode === 'padadhikari' && isStaffUser && filtered.length > 0 && !activeGrievance) {
+          loadGrievanceDetails(filtered[0].trackingId);
         }
       }
     } catch (e) {
@@ -247,8 +253,8 @@ export const GrievanceSection: React.FC = () => {
         </Button>
       </div>
 
-      {/* 2 MODES SELECTOR: वैयक्तिक / उद्योजक vs भाजप उद्योग पदाधिकारी कक्ष */}
-      <div className="bg-slate-100 p-1.5 rounded-2xl flex flex-col sm:flex-row items-stretch sm:items-center gap-2 border border-slate-200">
+      {/* 2 MODES SELECTOR — Samvad-style compact pill buttons */}
+      <div className="flex items-center gap-2 overflow-x-auto no-scrollbar py-0.5">
         <button
           type="button"
           onClick={() => {
@@ -256,19 +262,19 @@ export const GrievanceSection: React.FC = () => {
             setActiveGrievance(null);
             setSearchTrackingId('');
           }}
-          className={`flex-1 flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl font-black text-sm sm:text-base transition-all ${
+          className={`px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all flex items-center gap-2 whitespace-nowrap flex-shrink-0 ${
             grievanceMode === 'personal'
-              ? 'bg-white text-slate-900 shadow-sm border border-slate-200 ring-2 ring-[#D95F1A]/20'
-              : 'text-slate-600 hover:text-slate-900 hover:bg-slate-200/60'
+              ? 'bg-slate-900 text-white shadow-sm ring-2 ring-slate-900/10'
+              : 'bg-slate-100 text-slate-700 hover:bg-slate-200/80 border border-slate-200'
           }`}
         >
-          <User className={`w-5 h-5 ${grievanceMode === 'personal' ? 'text-[#D95F1A]' : 'text-slate-500'}`} />
+          <User className="w-4 h-4" />
           <span>
             {lang === 'en'
-              ? 'Personal / Entrepreneur Mode'
+              ? 'My Grievances'
               : lang === 'hi'
-              ? 'व्यक्तिगत / उद्यमी मोड'
-              : 'वैयक्तिक / उद्योजक तक्रारदार'}
+              ? 'मेरी शिकायतें'
+              : 'माझे तक्रार अर्ज'}
           </span>
         </button>
 
@@ -279,25 +285,20 @@ export const GrievanceSection: React.FC = () => {
             setActiveGrievance(null);
             setSearchTrackingId('');
           }}
-          className={`flex-1 flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl font-black text-sm sm:text-base transition-all ${
+          className={`px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all flex items-center gap-2 whitespace-nowrap flex-shrink-0 ${
             grievanceMode === 'padadhikari'
-              ? 'bg-[#1E3A8A] text-white shadow-md'
-              : 'text-slate-600 hover:text-slate-900 hover:bg-slate-200/60'
+              ? 'bg-[#1E3A8A] text-white shadow-sm ring-2 ring-blue-800/20'
+              : 'bg-blue-50 text-blue-800 border border-blue-200 hover:bg-blue-100/70'
           }`}
         >
-          <ShieldCheck className={`w-5 h-5 ${grievanceMode === 'padadhikari' ? 'text-amber-300' : 'text-slate-500'}`} />
+          <ShieldCheck className="w-4 h-4" />
           <span>
             {lang === 'en'
-              ? 'BJP Udyog Office-Bearer Desk'
+              ? 'Office-Bearer Desk'
               : lang === 'hi'
-              ? 'भाजपा उद्योग पदाधिकारी कक्ष'
-              : 'भाजप उद्योग पदाधिकारी कक्ष'}
+              ? 'पदाधिकारी कक्ष'
+              : 'पदाधिकारी कक्ष'}
           </span>
-          {isStaffUser && (
-            <span className="text-[10px] bg-amber-400 text-slate-900 px-2.5 py-0.5 rounded-full font-extrabold uppercase ml-1">
-              {lang === 'en' ? 'Active' : 'सक्रिय'}
-            </span>
-          )}
         </button>
       </div>
 
@@ -491,52 +492,53 @@ export const GrievanceSection: React.FC = () => {
                     const grvType = g.grievanceType || 'unanswered_gov';
                     const typeInfo = typeConfig[grvType] || typeConfig.unanswered_gov;
                     const TypeIcon = typeInfo.icon;
-                    const isUnansweredGov = grvType === 'unanswered_gov';
+                    const isActive = activeGrievance?.trackingId === g.trackingId;
+                    const statusColor =
+                      g.status === 'resolved' ? 'bg-emerald-50 text-emerald-700 border-emerald-200'
+                      : g.status === 'referred_to_state' ? 'bg-purple-50 text-purple-700 border-purple-200'
+                      : g.status === 'under_review' ? 'bg-amber-50 text-amber-800 border-amber-200'
+                      : g.status === 'action_taken' ? 'bg-blue-50 text-blue-700 border-blue-200'
+                      : 'bg-slate-100 text-slate-700 border-slate-200';
 
                     return (
                       <div
                         key={g.id}
                         onClick={() => loadGrievanceDetails(g.trackingId)}
-                        className={`p-5 rounded-2xl border cursor-pointer transition-all ${
-                          isUnansweredGov ? 'border-l-4 border-l-[#E35914]' : 'border-l-4 border-l-[#136938]'
-                        } ${
-                          activeGrievance?.trackingId === g.trackingId
-                            ? 'border-[#E35914] bg-orange-50/50 shadow-md ring-2 ring-orange-200'
-                            : 'border-slate-200 bg-white hover:border-slate-300 shadow-xs'
+                        className={`group relative p-4 sm:p-5 rounded-2xl border cursor-pointer transition-all duration-200 ${
+                          isActive
+                            ? 'border-[#E35914] bg-gradient-to-br from-orange-50/80 to-white shadow-lg ring-2 ring-orange-200/60'
+                            : 'border-slate-200/80 bg-white hover:bg-slate-50/50 hover:border-slate-300 hover:shadow-md shadow-xs'
                         }`}
                       >
-                        <div className="flex items-center justify-between mb-2">
-                          <span className="font-mono text-xs sm:text-sm font-bold text-[#E35914] bg-orange-50 px-2.5 py-0.5 rounded border border-orange-200">
+                        {/* Top row: Tracking ID + Status */}
+                        <div className="flex items-center justify-between mb-3">
+                          <span className={`font-mono text-[11px] sm:text-xs font-bold px-2.5 py-1 rounded-lg border ${
+                            isActive ? 'text-[#E35914] bg-orange-50 border-orange-200' : 'text-slate-600 bg-slate-50 border-slate-200'
+                          }`}>
                             {g.trackingId}
                           </span>
-                          <span
-                            className={`text-xs font-bold px-3 py-1 rounded-full border ${
-                              g.status === 'referred_to_state'
-                                ? 'bg-purple-50 text-purple-700 border-purple-200'
-                                : g.status === 'under_review'
-                                ? 'bg-amber-50 text-amber-800 border-amber-200'
-                                : 'bg-slate-100 text-slate-700 border-slate-200'
-                            }`}
-                          >
+                          <span className={`text-[10px] sm:text-xs font-bold px-2.5 py-0.5 rounded-full border ${statusColor}`}>
                             {statusLabel(g.status)}
                           </span>
                         </div>
 
-                        <div className="flex items-center gap-1.5 mb-2">
-                          <span className={`inline-flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1 rounded-lg border ${typeInfo.bg} ${typeInfo.text}`}>
-                            <TypeIcon className="w-3.5 h-3.5" />
-                            <span>{typeInfo.label}</span>
-                          </span>
-                        </div>
-
-                        <h4 className="font-extrabold text-[15px] sm:text-base text-slate-900 line-clamp-1 mb-1.5">
+                        {/* Title */}
+                        <h4 className="font-bold text-sm sm:text-[15px] text-slate-900 line-clamp-2 leading-snug mb-2">
                           {g.subject || g.businessName}
                         </h4>
-                        <p className="text-xs sm:text-sm text-slate-600 line-clamp-2 leading-relaxed">
-                          {g.explanation}
-                        </p>
-                        <div className="mt-3 pt-2 border-t border-slate-100 text-xs text-slate-500 font-medium">
-                          {g.district} • {new Date(g.createdAt).toLocaleDateString()}
+
+                        {/* Type Badge */}
+                        <span className={`inline-flex items-center gap-1 text-[10px] sm:text-xs font-semibold px-2 py-0.5 rounded-md border ${typeInfo.bg} ${typeInfo.text}`}>
+                          <TypeIcon className="w-3 h-3" />
+                          <span>{typeInfo.label}</span>
+                        </span>
+
+                        {/* Footer */}
+                        <div className="mt-3 pt-2.5 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-500 font-medium">
+                          <span>{g.district} • {new Date(g.createdAt).toLocaleDateString()}</span>
+                          <span className={`text-[10px] font-bold ${isActive ? 'text-[#E35914]' : 'text-slate-400 group-hover:text-slate-600'} transition-colors`}>
+                            {lang === 'en' ? 'View →' : 'पहा →'}
+                          </span>
                         </div>
                       </div>
                     );
@@ -765,52 +767,57 @@ export const GrievanceSection: React.FC = () => {
                       const typeInfo = typeConfig[grvType] || typeConfig.unanswered_gov;
                       const TypeIcon = typeInfo.icon;
 
+                      const isActive = activeGrievance?.trackingId === g.trackingId;
+                      const statusColor =
+                        g.status === 'resolved' ? 'bg-emerald-50 text-emerald-700 border-emerald-200'
+                        : g.status === 'referred_to_state' ? 'bg-purple-50 text-purple-700 border-purple-200'
+                        : g.status === 'under_review' ? 'bg-amber-50 text-amber-800 border-amber-200'
+                        : g.status === 'action_taken' ? 'bg-blue-50 text-blue-700 border-blue-200'
+                        : 'bg-slate-100 text-slate-700 border-slate-200';
+
                       return (
                         <div
                           key={g.id}
                           onClick={() => loadGrievanceDetails(g.trackingId)}
-                          className={`p-5 rounded-2xl border cursor-pointer transition-all ${
-                            activeGrievance?.trackingId === g.trackingId
-                              ? 'border-[#1E3A8A] bg-blue-50/40 shadow-md ring-2 ring-blue-200'
-                              : 'border-slate-200 bg-white hover:border-slate-300 shadow-xs'
+                          className={`group relative p-4 sm:p-5 rounded-2xl border cursor-pointer transition-all duration-200 ${
+                            isActive
+                              ? 'border-[#1E3A8A] bg-gradient-to-br from-blue-50/80 to-white shadow-lg ring-2 ring-blue-200/60'
+                              : 'border-slate-200/80 bg-white hover:bg-slate-50/50 hover:border-slate-300 hover:shadow-md shadow-xs'
                           }`}
                         >
-                          <div className="flex items-center justify-between mb-2">
-                            <span className="font-mono text-xs sm:text-sm font-bold text-blue-900 bg-blue-50 px-2.5 py-0.5 rounded border border-blue-200">
+                          {/* Top row: Tracking ID + Status */}
+                          <div className="flex items-center justify-between mb-3">
+                            <span className={`font-mono text-[11px] sm:text-xs font-bold px-2.5 py-1 rounded-lg border ${
+                              isActive ? 'text-[#1E3A8A] bg-blue-50 border-blue-200' : 'text-slate-600 bg-slate-50 border-slate-200'
+                            }`}>
                               {g.trackingId}
                             </span>
-                            <span
-                              className={`text-xs font-bold px-3 py-1 rounded-full border ${
-                                g.status === 'referred_to_state'
-                                ? 'bg-purple-50 text-purple-700 border-purple-200'
-                                : g.status === 'under_review'
-                                ? 'bg-amber-50 text-amber-800 border-amber-200'
-                                : 'bg-slate-100 text-slate-700 border-slate-200'
-                              }`}
-                            >
+                            <span className={`text-[10px] sm:text-xs font-bold px-2.5 py-0.5 rounded-full border ${statusColor}`}>
                               {statusLabel(g.status)}
                             </span>
                           </div>
 
-                          <div className="flex items-center gap-1.5 mb-2">
-                            <span className={`inline-flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1 rounded-lg border ${typeInfo.bg} ${typeInfo.text}`}>
-                              <TypeIcon className="w-3.5 h-3.5" />
-                              <span>{typeInfo.label}</span>
-                            </span>
-                          </div>
-
-                          <h4 className="font-extrabold text-[15px] sm:text-base text-slate-900 line-clamp-1 mb-1">
+                          {/* Title */}
+                          <h4 className="font-bold text-sm sm:text-[15px] text-slate-900 line-clamp-2 leading-snug mb-2">
                             {g.subject || g.businessName}
                           </h4>
-                          <p className="text-xs sm:text-sm text-slate-600 line-clamp-2 leading-relaxed">
-                            {g.explanation}
-                          </p>
 
-                          <div className="mt-3 pt-2 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500 font-medium">
+                          {/* Type Badge */}
+                          <span className={`inline-flex items-center gap-1 text-[10px] sm:text-xs font-semibold px-2 py-0.5 rounded-md border ${typeInfo.bg} ${typeInfo.text}`}>
+                            <TypeIcon className="w-3 h-3" />
+                            <span>{typeInfo.label}</span>
+                          </span>
+
+                          {/* Footer */}
+                          <div className="mt-3 pt-2.5 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-500 font-medium">
                             <span>{g.district} • {new Date(g.createdAt).toLocaleDateString()}</span>
-                            {g.assignedOfficeBearerName && (
-                              <span className="text-emerald-700 font-bold">
+                            {g.assignedOfficeBearerName ? (
+                              <span className="text-emerald-700 font-bold text-[10px]">
                                 ✓ {g.assignedOfficeBearerName.split(' ')[0]}
+                              </span>
+                            ) : (
+                              <span className={`text-[10px] font-bold ${isActive ? 'text-[#1E3A8A]' : 'text-slate-400 group-hover:text-slate-600'} transition-colors`}>
+                                {lang === 'en' ? 'View →' : 'पहा →'}
                               </span>
                             )}
                           </div>
