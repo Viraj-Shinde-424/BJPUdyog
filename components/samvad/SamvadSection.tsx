@@ -276,7 +276,7 @@ export const SamvadSection: React.FC = () => {
             />
           </form>
 
-          <div className="flex items-center gap-2.5 self-end sm:self-center">
+          <div className="flex items-center justify-between sm:justify-end gap-2.5 w-full sm:w-auto">
             <div className="text-xs sm:text-sm text-slate-700 font-bold whitespace-nowrap bg-slate-100 px-3.5 py-2 rounded-xl">
               <span className="text-[#D95F1A] font-black">{topics.length}</span>{' '}
               <span>{lang === 'en' ? 'sessions available' : 'सत्रे उपलब्ध'}</span>
@@ -313,12 +313,12 @@ export const SamvadSection: React.FC = () => {
         </div>
 
         {/* Row 2: Distinct Filter Chips + Category & Sector Dropdowns (BOTTOM) */}
-        <div className="flex flex-wrap items-center justify-between gap-3 pt-1">
-          <div className="flex flex-wrap items-center gap-2.5">
+        <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3 pt-1">
+          <div className="flex items-center gap-2 overflow-x-auto no-scrollbar py-0.5">
             <button
               type="button"
               onClick={() => setSelectedOrganizerType('all')}
-              className={`px-4 py-2 sm:py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all flex items-center gap-2 ${
+              className={`px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all flex items-center gap-2 whitespace-nowrap flex-shrink-0 ${
                 selectedOrganizerType === 'all'
                   ? 'bg-slate-900 text-white shadow-sm ring-2 ring-slate-900/10'
                   : 'bg-slate-100 text-slate-700 hover:bg-slate-200/80 border border-slate-200'
@@ -339,7 +339,7 @@ export const SamvadSection: React.FC = () => {
             <button
               type="button"
               onClick={() => setSelectedOrganizerType('association')}
-              className={`px-4 py-2 sm:py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all flex items-center gap-2 ${
+              className={`px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all flex items-center gap-2 whitespace-nowrap flex-shrink-0 ${
                 selectedOrganizerType === 'association'
                   ? 'bg-[#136938] text-white shadow-sm ring-2 ring-emerald-600/20'
                   : 'bg-emerald-50 text-[#136938] border border-emerald-200 hover:bg-emerald-100/70'
@@ -352,7 +352,7 @@ export const SamvadSection: React.FC = () => {
             <button
               type="button"
               onClick={() => setSelectedOrganizerType('individual')}
-              className={`px-4 py-2 sm:py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all flex items-center gap-2 ${
+              className={`px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all flex items-center gap-2 whitespace-nowrap flex-shrink-0 ${
                 selectedOrganizerType === 'individual'
                   ? 'bg-[#D95F1A] text-white shadow-sm ring-2 ring-orange-500/20'
                   : 'bg-orange-50 text-[#D95F1A] border border-orange-200 hover:bg-orange-100/70'
@@ -364,9 +364,9 @@ export const SamvadSection: React.FC = () => {
           </div>
 
           {/* Right Controls: Category Dropdown & Sector Dropdown */}
-          <div className="flex items-center gap-2.5 flex-wrap sm:flex-nowrap w-full md:w-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 w-full md:w-auto">
             {/* Category Dropdown */}
-            <div className="relative flex-1 sm:flex-initial sm:min-w-[195px]">
+            <div className="relative w-full sm:min-w-[185px]">
               <select
                 value={selectedCategory}
                 onChange={(e) => setSelectedCategory(e.target.value)}
@@ -382,7 +382,7 @@ export const SamvadSection: React.FC = () => {
             </div>
 
             {/* Sector Dropdown */}
-            <div className="relative flex-1 sm:flex-initial sm:min-w-[165px]">
+            <div className="relative w-full sm:min-w-[160px]">
               <select
                 value={selectedSector}
                 onChange={(e) => setSelectedSector(e.target.value)}

@@ -56,6 +56,22 @@ textarea:focus-visible {
   background: #94A3B8;
 }
 
+/* Hide scrollbar for clean touch-scrolling carousels */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Safe viewport width and responsive wrappers */
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+  position: relative;
+}
+
 /* Standard ticker animation for government notices */
 @keyframes ticker {
   0% { transform: translateX(0); }

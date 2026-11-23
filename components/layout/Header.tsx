@@ -151,59 +151,107 @@ export const Header: React.FC = () => {
     setAuthDropdownOpen(false);
   };
 
+  const LanguageSwitcher: React.FC<{ className?: string }> = ({ className = '' }) => (
+    <div className={`flex items-center bg-white/95 p-0.5 sm:p-1 rounded-full border border-slate-300 text-[11px] sm:text-xs font-bold shadow-2xs ${className}`}>
+      <button
+        type="button"
+        onClick={() => setLang('mr')}
+        className={`px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full transition-all duration-150 ${
+          lang === 'mr'
+            ? 'bg-[#D95F1A] text-white shadow-2xs font-extrabold'
+            : 'text-slate-700 hover:text-[#D95F1A]'
+        }`}
+        title="मराठी भाषा निवडा"
+      >
+        मराठी
+      </button>
+      <button
+        type="button"
+        onClick={() => setLang('hi')}
+        className={`px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full transition-all duration-150 ${
+          lang === 'hi'
+            ? 'bg-[#D95F1A] text-white shadow-2xs font-extrabold'
+            : 'text-slate-700 hover:text-[#D95F1A]'
+        }`}
+        title="हिंदी भाषा चुनें"
+      >
+        हिंदी
+      </button>
+      <button
+        type="button"
+        onClick={() => setLang('en')}
+        className={`px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full transition-all duration-150 ${
+          lang === 'en'
+            ? 'bg-[#D95F1A] text-white shadow-2xs font-extrabold'
+            : 'text-slate-700 hover:text-[#D95F1A]'
+        }`}
+        title="Select English Language"
+      >
+        English
+      </button>
+    </div>
+  );
+
   return (
     <header className="w-full bg-white relative z-40">
       {/* 1. TOP HAIRLINE TRICOLOR ACCENT */}
       <div className="h-[3px] bg-gradient-to-r from-[#D95F1A] via-amber-400 to-[#136938] w-full" />
 
       {/* 2. OFFICIAL EXECUTIVE MASTHEAD & DIGNITARIES BAR */}
-      <div className="bg-[#FAF7F2] border-b border-[#EDE6D8] px-4 sm:px-6 lg:px-8 py-2.5 sm:py-3.5 transition-colors">
-        <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-3 lg:gap-6">
+      <div className="bg-[#FAF7F2] border-b border-[#EDE6D8] px-3 sm:px-6 lg:px-8 py-2 sm:py-3 transition-colors">
+        <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-2.5 sm:gap-3 lg:gap-6">
           
-          {/* LEFT: Government / Official Seal & Live Status */}
-          <div className="flex items-center gap-2.5 text-xs sm:text-[13px] text-slate-800">
-            <span className="flex h-2.5 w-2.5 relative">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-600" />
-            </span>
-            <span className="font-extrabold text-slate-900 tracking-tight">
-              {lang === 'en'
-                ? 'Government of Maharashtra • BJP Udyog Aghadi Official Portal'
-                : lang === 'hi'
-                ? 'महाराष्ट्र शासन • भाजपा उद्योग अघाड़ी आधिकारिक मंच'
-                : 'महाराष्ट्र शासन • भाजप उद्योग आघाडी अधिकृत मंच'}
-            </span>
-            <span className="hidden sm:inline-block text-[11px] bg-emerald-100/90 text-emerald-900 border border-emerald-300 px-2.5 py-0.5 rounded-full font-bold shadow-2xs">
-              ● {lang === 'en' ? 'Verified State Portal' : 'अधिकृत डिजिटल सेतू'}
-            </span>
+          {/* TOP ON MOBILE / LEFT ON DESKTOP: Government Seal & Mobile Language Switcher */}
+          <div className="w-full lg:w-auto flex items-center justify-between gap-2 text-xs sm:text-[13px] text-slate-800">
+            <div className="flex items-center gap-2 min-w-0">
+              <span className="flex h-2.5 w-2.5 relative flex-shrink-0">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-600" />
+              </span>
+              <span className="font-extrabold text-slate-900 tracking-tight text-[11px] sm:text-xs md:text-[13px] truncate">
+                {lang === 'en'
+                  ? 'Government of Maharashtra • BJP Udyog Aghadi Official Portal'
+                  : lang === 'hi'
+                  ? 'महाराष्ट्र शासन • भाजपा उद्योग अघाड़ी आधिकारिक मंच'
+                  : 'महाराष्ट्र शासन • भाजप उद्योग आघाडी अधिकृत मंच'}
+              </span>
+              <span className="hidden xl:inline-block text-[11px] bg-emerald-100/90 text-emerald-900 border border-emerald-300 px-2.5 py-0.5 rounded-full font-bold shadow-2xs whitespace-nowrap">
+                ● {lang === 'en' ? 'Verified State Portal' : 'अधिकृत डिजिटल सेतू'}
+              </span>
+            </div>
+
+            {/* Mobile Language Switcher */}
+            <div className="lg:hidden flex-shrink-0">
+              <LanguageSwitcher />
+            </div>
           </div>
 
-          {/* RIGHT: High-Prominence Leadership Strip & Language Switcher */}
-          <div className="flex items-center justify-between lg:justify-end gap-4 sm:gap-6 w-full lg:w-auto">
-            {/* The 3 Distinguished Leaders: Extra Large, Recognizable Photos & Clear Bold Text */}
-            <div className="flex items-center gap-4 sm:gap-6">
+          {/* DIGNITARIES STRIP & DESKTOP LANGUAGE SELECTOR */}
+          <div className="w-full lg:w-auto flex items-center justify-between lg:justify-end gap-3 sm:gap-6">
+            {/* The 3 Distinguished Leaders */}
+            <div className="w-full lg:w-auto flex items-center justify-between sm:justify-center lg:justify-end gap-2.5 sm:gap-5 lg:gap-6 overflow-x-auto no-scrollbar py-0.5">
               {leaders.map((leader) => (
                 <div
                   key={leader.key}
-                  className="flex items-center gap-2.5 sm:gap-3 group cursor-default"
+                  className="flex items-center gap-2 sm:gap-3 group cursor-default flex-shrink-0"
                 >
                   {/* Noticeably Enlarged & Crisp Portrait */}
-                  <div className="relative w-11 h-11 sm:w-13 sm:h-13 rounded-full overflow-hidden ring-2 ring-orange-400/80 shadow-md bg-orange-100 border-2 border-white flex-shrink-0 group-hover:scale-105 group-hover:ring-orange-500 transition-all duration-200">
+                  <div className="relative w-10 h-10 sm:w-12 sm:h-12 lg:w-13 lg:h-13 rounded-full overflow-hidden ring-2 ring-orange-400/80 shadow-md bg-orange-100 border-2 border-white flex-shrink-0 group-hover:scale-105 group-hover:ring-orange-500 transition-all duration-200">
                     <Image
                       src={leader.image}
                       alt={leader.name}
                       fill
                       className="object-cover object-top"
-                      sizes="60px"
+                      sizes="(max-width: 640px) 44px, 56px"
                       priority
                     />
                   </div>
                   {/* Prominent & Legible Typography */}
                   <div className="flex flex-col text-left">
-                    <span className="font-black text-xs sm:text-[13.5px] text-slate-900 leading-tight group-hover:text-[#D95F1A] transition-colors whitespace-nowrap">
+                    <span className="font-black text-[11px] sm:text-xs lg:text-[13.5px] text-slate-900 leading-tight group-hover:text-[#D95F1A] transition-colors whitespace-nowrap">
                       {leader.name}
                     </span>
-                    <span className="text-[10px] sm:text-[11.5px] font-bold text-[#D95F1A] leading-tight mt-0.5 whitespace-nowrap">
+                    <span className="text-[9px] sm:text-[10px] lg:text-[11.5px] font-bold text-[#D95F1A] leading-tight mt-0.5 whitespace-nowrap">
                       {leader.role}
                     </span>
                   </div>
@@ -211,47 +259,10 @@ export const Header: React.FC = () => {
               ))}
             </div>
 
-            {/* Subtle Divider */}
-            <div className="h-8 w-px bg-slate-300 hidden sm:block" />
-
-            {/* 3-WAY MULTILINGUAL LANGUAGE SELECTOR */}
-            <div className="flex items-center bg-white/95 p-1 rounded-full border border-slate-300 text-xs font-bold shadow-2xs">
-              <button
-                type="button"
-                onClick={() => setLang('mr')}
-                className={`px-2.5 py-1 rounded-full transition-all duration-150 ${
-                  lang === 'mr'
-                    ? 'bg-[#D95F1A] text-white shadow-2xs font-extrabold'
-                    : 'text-slate-700 hover:text-[#D95F1A]'
-                }`}
-                title="मराठी भाषा निवडा"
-              >
-                मराठी
-              </button>
-              <button
-                type="button"
-                onClick={() => setLang('hi')}
-                className={`px-2.5 py-1 rounded-full transition-all duration-150 ${
-                  lang === 'hi'
-                    ? 'bg-[#D95F1A] text-white shadow-2xs font-extrabold'
-                    : 'text-slate-700 hover:text-[#D95F1A]'
-                }`}
-                title="हिंदी भाषा चुनें"
-              >
-                हिंदी
-              </button>
-              <button
-                type="button"
-                onClick={() => setLang('en')}
-                className={`px-2.5 py-1 rounded-full transition-all duration-150 ${
-                  lang === 'en'
-                    ? 'bg-[#D95F1A] text-white shadow-2xs font-extrabold'
-                    : 'text-slate-700 hover:text-[#D95F1A]'
-                }`}
-                title="Select English Language"
-              >
-                English
-              </button>
+            {/* Desktop Language Switcher */}
+            <div className="hidden lg:flex items-center gap-3">
+              <div className="h-8 w-px bg-slate-300" />
+              <LanguageSwitcher />
             </div>
           </div>
         </div>
@@ -259,15 +270,15 @@ export const Header: React.FC = () => {
 
       {/* 3. MAIN EXECUTIVE GLASSMORPHIC STICKY NAVBAR */}
       <div className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200/90 shadow-xs transition-all">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16 sm:h-[68px]">
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-14 sm:h-16 lg:h-[68px]">
             
             {/* LEFT: Official Logo & Portal Identity */}
             <Link
               href="/"
-              className="flex items-center gap-3 group flex-shrink-0 transition-transform duration-200 hover:opacity-95"
+              className="flex items-center gap-2 sm:gap-3 group flex-shrink-0 transition-transform duration-200 hover:opacity-95 max-w-[65%] sm:max-w-none"
             >
-              <div className="relative w-10 h-10 sm:w-11 sm:h-11 flex-shrink-0 flex items-center justify-center p-0.5 bg-orange-50/50 rounded-xl border border-orange-100 group-hover:border-orange-300 transition-colors">
+              <div className="relative w-8 h-8 sm:w-10 sm:h-10 lg:w-11 lg:h-11 flex-shrink-0 flex items-center justify-center p-0.5 bg-orange-50/50 rounded-xl border border-orange-100 group-hover:border-orange-300 transition-colors">
                 <Image
                   src="/images/bjp-logo.png"
                   alt="BJP Lotus Emblem"
@@ -278,16 +289,16 @@ export const Header: React.FC = () => {
                 />
               </div>
 
-              <div className="flex flex-col">
-                <div className="flex items-center gap-1.5">
-                  <span className="text-xl sm:text-[22px] font-black text-slate-900 tracking-tight leading-none group-hover:text-[#D95F1A] transition-colors">
+              <div className="flex flex-col min-w-0">
+                <div className="flex items-center gap-1 sm:gap-1.5">
+                  <span className="text-base sm:text-xl lg:text-[22px] font-black text-slate-900 tracking-tight leading-none group-hover:text-[#D95F1A] transition-colors truncate">
                     {lang === 'en' ? 'BJP Udyog Setu' : lang === 'hi' ? 'भाजपा उद्योग सेतु' : 'भाजपा उद्योग सेतू'}
                   </span>
-                  <span className="text-[10px] bg-gradient-to-r from-amber-50 to-orange-50 text-[#D95F1A] border border-orange-200/80 font-bold px-2 py-0.5 rounded-full shadow-2xs">
+                  <span className="text-[9px] sm:text-[10px] bg-gradient-to-r from-amber-50 to-orange-50 text-[#D95F1A] border border-orange-200/80 font-bold px-1.5 sm:px-2 py-0.5 rounded-full shadow-2xs whitespace-nowrap">
                     {lang === 'en' ? 'Maharashtra' : 'महाराष्ट्र'}
                   </span>
                 </div>
-                <span className="text-[11px] sm:text-[12px] font-semibold text-slate-500 leading-tight mt-0.5 hidden sm:block">
+                <span className="text-[10px] sm:text-[11px] lg:text-[12px] font-semibold text-slate-500 leading-tight mt-0.5 hidden md:block truncate">
                   {lang === 'en'
                     ? 'Maharashtra Industry Information, Coordination & Guidance Platform'
                     : lang === 'hi'
@@ -298,7 +309,7 @@ export const Header: React.FC = () => {
             </Link>
 
             {/* CENTER: BESPOKE FLOATING SEGMENTED CAPSULE DOCK */}
-            <nav className="hidden md:flex items-center justify-center bg-slate-100/90 p-1.5 rounded-full border border-slate-200/90 shadow-2xs gap-1 backdrop-blur-sm">
+            <nav className="hidden lg:flex items-center justify-center bg-slate-100/90 p-1.5 rounded-full border border-slate-200/90 shadow-2xs gap-1 backdrop-blur-sm">
               {mainNavLinks.map((link) => {
                 const active = isActive(link.href);
                 const Icon = link.icon;
@@ -306,7 +317,7 @@ export const Header: React.FC = () => {
                   <Link
                     key={link.href}
                     href={link.href}
-                    className={`px-3.5 lg:px-4 py-1.5 rounded-full font-bold text-xs lg:text-[13px] flex items-center gap-1.5 transition-all duration-200 nav-pill-hover ${
+                    className={`px-3 lg:px-4 py-1.5 rounded-full font-bold text-xs lg:text-[13px] flex items-center gap-1.5 transition-all duration-200 nav-pill-hover ${
                       active
                         ? 'bg-gradient-to-r from-[#D95F1A] to-[#B84A0E] text-white shadow-xs'
                         : 'text-slate-700 hover:text-slate-900 hover:bg-white/90'
@@ -320,28 +331,28 @@ export const Header: React.FC = () => {
             </nav>
 
             {/* RIGHT: EXECUTIVE AUTHENTICATION & PROFILE BUTTON */}
-            <div className="relative flex items-center gap-2">
+            <div className="relative flex items-center gap-1.5 sm:gap-2">
               <button
                 type="button"
                 onClick={() => setAuthDropdownOpen(!authDropdownOpen)}
-                className={`px-4 py-2 rounded-full font-bold transition-all duration-150 flex items-center gap-2 text-xs sm:text-sm tracking-wide btn-press ${
+                className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-full font-bold transition-all duration-150 flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm tracking-wide btn-press ${
                   currentUser
                     ? 'bg-orange-50/90 hover:bg-orange-100/80 text-[#D95F1A] border border-orange-200 shadow-2xs'
                     : 'bg-gradient-to-r from-[#D95F1A] via-orange-600 to-[#B84A0E] hover:from-[#B84A0E] hover:to-[#963806] text-white shadow-xs hover:shadow-md border border-orange-400/30'
                 }`}
                 aria-label="Account Login or Registration menu"
               >
-                <div className={`w-5 h-5 rounded-full flex items-center justify-center text-xs ${currentUser ? 'bg-orange-200/80 text-[#D95F1A]' : 'bg-white/20 text-white'}`}>
-                  <User className="w-3.5 h-3.5" />
+                <div className={`w-4 h-4 sm:w-5 sm:h-5 rounded-full flex items-center justify-center text-xs ${currentUser ? 'bg-orange-200/80 text-[#D95F1A]' : 'bg-white/20 text-white'}`}>
+                  <User className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
                 </div>
-                <span>
+                <span className="truncate max-w-[85px] sm:max-w-none">
                   {currentUser
                     ? currentUser.fullName.split(' ')[0]
                     : lang === 'en'
-                    ? 'Login / Register'
-                    : 'लॉगिन / नोंदणी'}
+                    ? 'Login'
+                    : 'लॉगिन'}
                 </span>
-                <ChevronDown className="w-3.5 h-3.5 opacity-80" />
+                <ChevronDown className="w-3 h-3 sm:w-3.5 sm:h-3.5 opacity-80" />
               </button>
 
               {/* ACCOUNT DROPDOWN MENU */}
@@ -475,7 +486,7 @@ export const Header: React.FC = () => {
               {/* Mobile Hamburger Menu Toggle */}
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="md:hidden p-2 rounded-xl text-slate-700 hover:text-slate-900 hover:bg-slate-100 transition-colors ml-1"
+                className="lg:hidden p-1.5 sm:p-2 rounded-xl text-slate-700 hover:text-slate-900 hover:bg-slate-100 transition-colors ml-0.5"
                 aria-label="Toggle navigation menu"
               >
                 {mobileMenuOpen ? <X className="w-5 h-5 text-[#D95F1A]" /> : <Menu className="w-5 h-5" />}
@@ -488,7 +499,7 @@ export const Header: React.FC = () => {
 
       {/* 4. MOBILE NAVIGATION DRAWER */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-b border-slate-200 bg-white/95 backdrop-blur-md px-4 pt-3 pb-5 shadow-lg animate-slideDown">
+        <div className="lg:hidden border-b border-slate-200 bg-white/95 backdrop-blur-md px-4 pt-3 pb-5 shadow-lg animate-slideDown">
           <div className="flex flex-col gap-1.5 text-sm font-semibold">
             {mainNavLinks.map((link) => {
               const active = isActive(link.href);

@@ -319,11 +319,11 @@ export const HeroSearch: React.FC = () => {
 
         {/* Smart Search Mode Segmented Control */}
         <div className="flex justify-center mb-5">
-          <div className="inline-flex p-1.5 rounded-xl bg-white border border-slate-200/90 shadow-xs gap-1">
+          <div className="inline-flex flex-col sm:flex-row p-1 sm:p-1.5 rounded-xl bg-white border border-slate-200/90 shadow-xs gap-1 w-full sm:w-auto">
             <button
               type="button"
               onClick={() => setSearchMode('guidance')}
-              className={`flex items-center gap-2 px-4 sm:px-5 py-2 rounded-lg text-xs sm:text-sm font-bold transition-all ${
+              className={`flex items-center justify-center gap-2 px-3.5 sm:px-5 py-2 rounded-lg text-xs sm:text-sm font-bold transition-all ${
                 searchMode === 'guidance'
                   ? 'bg-[#D95F1A] text-white shadow-sm'
                   : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
@@ -342,7 +342,7 @@ export const HeroSearch: React.FC = () => {
             <button
               type="button"
               onClick={() => setSearchMode('schemes')}
-              className={`flex items-center gap-2 px-4 sm:px-5 py-2 rounded-lg text-xs sm:text-sm font-bold transition-all ${
+              className={`flex items-center justify-center gap-2 px-3.5 sm:px-5 py-2 rounded-lg text-xs sm:text-sm font-bold transition-all ${
                 searchMode === 'schemes'
                   ? 'bg-[#136938] text-white shadow-sm'
                   : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
@@ -362,36 +362,38 @@ export const HeroSearch: React.FC = () => {
 
         {/* Flagship Omni-Search Console */}
         <form onSubmit={handleSearch} className="max-w-3xl mx-auto mb-4">
-          <div className="relative flex items-center rounded-2xl bg-white border-2 border-slate-200 focus-within:border-[#D95F1A] shadow-md p-2 transition-all">
-            <div className="pl-3.5 pr-2 text-slate-400 flex items-center justify-center">
-              <Search className="w-5 h-5 text-[#D95F1A]" />
-            </div>
+          <div className="relative flex flex-col sm:flex-row items-stretch sm:items-center rounded-2xl bg-white border-2 border-slate-200 focus-within:border-[#D95F1A] shadow-md p-1.5 sm:p-2 gap-2 sm:gap-0 transition-all">
+            <div className="flex items-center flex-1 min-w-0">
+              <div className="pl-2.5 sm:pl-3.5 pr-2 text-slate-400 flex items-center justify-center flex-shrink-0">
+                <Search className="w-4 h-4 sm:w-5 sm:h-5 text-[#D95F1A]" />
+              </div>
 
-            <input
-              type="text"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              placeholder={
-                searchMode === 'guidance'
-                  ? lang === 'en'
-                    ? 'e.g., What documents are required to set up a foundry in Pune?'
-                    : lang === 'hi'
-                    ? 'उदा. पुणे में फाउंड्री शुरू करने के लिए कौन से दस्तावेज लगेंगे?'
-                    : 'उदा. पुण्यात फाउंड्री सुरू करण्यासाठी कोणती कागदपत्रे लागतील?'
-                  : lang === 'en'
-                    ? 'e.g., Solar rooftop subsidy, CMEGP loan, PSI 2019 capital incentives...'
-                    : lang === 'hi'
-                    ? 'उदा. सोलर रूफटॉप सब्सिडी, CMEGP उद्योग ऋण, PSI 2019 प्रोत्साहन...'
-                    : 'उदा. सोलर रूफटॉप सबसिडी, CMEGP ५० लाख कर्ज, PSI 2019 व्याज सवलत...'
-              }
-              className="w-full py-2.5 px-2 text-xs sm:text-sm text-slate-900 bg-transparent focus:outline-none placeholder:text-slate-400 font-medium"
-            />
+              <input
+                type="text"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder={
+                  searchMode === 'guidance'
+                    ? lang === 'en'
+                      ? 'e.g., What documents are required to set up a foundry in Pune?'
+                      : lang === 'hi'
+                      ? 'उदा. पुणे में फाउंड्री शुरू करने के लिए कौन से दस्तावेज लगेंगे?'
+                      : 'उदा. पुण्यात फाउंड्री सुरू करण्यासाठी कोणती कागदपत्रे लागतील?'
+                    : lang === 'en'
+                      ? 'e.g., Solar rooftop subsidy, CMEGP loan, PSI 2019 capital incentives...'
+                      : lang === 'hi'
+                      ? 'उदा. सोलर रूफटॉप सब्सिडी, CMEGP उद्योग ऋण, PSI 2019 प्रोत्साहन...'
+                      : 'उदा. सोलर रूफटॉप सबसिडी, CMEGP ५० लाख कर्ज, PSI 2019 व्याज सवलत...'
+                }
+                className="w-full py-2 sm:py-2.5 px-2 text-xs sm:text-sm text-slate-900 bg-transparent focus:outline-none placeholder:text-slate-400 font-medium"
+              />
+            </div>
 
             <Button
               type="submit"
               size="md"
               variant={searchMode === 'guidance' ? 'primary' : 'secondary'}
-              className="py-2.5 px-6 rounded-xl text-xs sm:text-sm font-bold shadow-xs whitespace-nowrap bg-[#D95F1A] hover:bg-[#B84A0E]"
+              className="py-2.5 px-5 sm:px-6 rounded-xl text-xs sm:text-sm font-bold shadow-xs whitespace-nowrap bg-[#D95F1A] hover:bg-[#B84A0E] flex items-center justify-center"
             >
               <span className="flex items-center gap-1.5">
                 <span>{t('hero', 'searchBtn')}</span>
@@ -402,8 +404,8 @@ export const HeroSearch: React.FC = () => {
         </form>
 
         {/* Curated Fast-Action Query Chips */}
-        <div className="flex flex-wrap items-center justify-center gap-2 max-w-3xl mx-auto mb-10">
-          <span className="text-[11px] font-bold text-slate-500 mr-0.5">
+        <div className="flex items-center justify-start sm:justify-center gap-2 max-w-3xl mx-auto mb-8 sm:mb-10 overflow-x-auto no-scrollbar py-1">
+          <span className="text-[11px] font-bold text-slate-500 mr-0.5 whitespace-nowrap flex-shrink-0">
             {lang === 'en' ? 'Quick Searches:' : lang === 'hi' ? 'त्वरित खोज:' : 'त्वरित शोध:'}
           </span>
           {quickChips.map((chip, idx) => (
@@ -411,7 +413,7 @@ export const HeroSearch: React.FC = () => {
               key={idx}
               type="button"
               onClick={() => handleQuickPrompt(chip.query, chip.mode)}
-              className="px-3 py-1 rounded-full bg-white hover:bg-orange-50 border border-slate-200 hover:border-orange-300 text-[11px] font-semibold text-slate-700 hover:text-[#D95F1A] transition-all shadow-2xs hover:shadow-xs"
+              className="px-3 py-1 rounded-full bg-white hover:bg-orange-50 border border-slate-200 hover:border-orange-300 text-[11px] font-semibold text-slate-700 hover:text-[#D95F1A] transition-all shadow-2xs hover:shadow-xs whitespace-nowrap flex-shrink-0"
             >
               {chip.label}
             </button>
