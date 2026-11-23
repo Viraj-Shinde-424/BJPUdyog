@@ -72,6 +72,20 @@ html, body {
   position: relative;
 }
 
+/* Laptop Display Density Optimization (14", 15", 16" screens) */
+@media (min-width: 1280px) and (max-width: 1535px) {
+  /* 14-inch to 15-inch standard scaled viewports */
+  :root {
+    font-size: 15.5px;
+  }
+}
+@media (min-width: 1536px) {
+  /* 15.6-inch & 16-inch displays */
+  :root {
+    font-size: 16px;
+  }
+}
+
 /* Standard ticker animation for government notices */
 @keyframes ticker {
   0% { transform: translateX(0); }

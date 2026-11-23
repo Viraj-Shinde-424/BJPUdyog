@@ -108,10 +108,10 @@ export const LeadershipSection: React.FC = () => {
   };
 
   return (
-    <section className="py-12 sm:py-16 bg-white border-b border-slate-200">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6">
+    <section className="py-12 sm:py-16 xl:py-20 bg-white border-b border-slate-200">
+      <div className="max-w-[1440px] 2xl:max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10">
         {/* Dignified Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-10">
+        <div className="text-center max-w-3xl xl:max-w-4xl mx-auto mb-10 xl:mb-12">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-100/80 border border-orange-200/80 text-[11px] font-bold text-[#D95F1A] mb-3 shadow-2xs">
             <ShieldCheck className="w-3.5 h-3.5" />
             <span>
@@ -123,7 +123,7 @@ export const LeadershipSection: React.FC = () => {
             </span>
           </div>
 
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight leading-tight">
+          <h2 className="text-2xl sm:text-3xl xl:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
             {lang === 'en'
               ? 'Leadership & State Industry Coordination'
               : lang === 'hi'
@@ -131,7 +131,7 @@ export const LeadershipSection: React.FC = () => {
               : 'सर्वोच्च नेतृत्व व उद्योग समन्वय'}
           </h2>
 
-          <p className="mt-2 text-xs sm:text-sm text-slate-600 leading-relaxed font-normal max-w-2xl mx-auto">
+          <p className="mt-2 text-xs sm:text-sm xl:text-base text-slate-600 leading-relaxed font-normal max-w-2xl xl:max-w-3xl mx-auto">
             {lang === 'en'
               ? "Official leadership coordination platform driving Atmanirbhar Bharat and Maharashtra's $1 Trillion industrial economy."
               : lang === 'hi'
@@ -141,7 +141,7 @@ export const LeadershipSection: React.FC = () => {
         </div>
 
         {/* 3 Executive Leadership Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 xl:gap-8 max-w-[1440px] 2xl:max-w-[1600px] mx-auto mb-8 xl:mb-10">
           {leaders.map((leader) => (
             <div
               key={leader.key}

@@ -22,7 +22,7 @@ export default function GrievanceRootPage() {
 
       <div className="min-h-screen flex flex-col bg-[#F8FAFC]">
         <Header />
-        <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <main className="flex-1 max-w-[1440px] 2xl:max-w-[1600px] w-full mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 py-6 xl:py-8">
           <GrievanceSection />
         </main>
         <Footer />

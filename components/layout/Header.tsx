@@ -198,8 +198,8 @@ export const Header: React.FC = () => {
       <div className="h-[3px] bg-gradient-to-r from-[#D95F1A] via-amber-400 to-[#136938] w-full" />
 
       {/* 2. OFFICIAL EXECUTIVE MASTHEAD & DIGNITARIES BAR */}
-      <div className="bg-[#FAF7F2] border-b border-[#EDE6D8] px-3 sm:px-6 lg:px-8 py-2 sm:py-3 transition-colors">
-        <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-2.5 sm:gap-3 lg:gap-6">
+      <div className="bg-[#FAF7F2] border-b border-[#EDE6D8] px-3 sm:px-6 lg:px-8 xl:px-10 py-2 sm:py-2.5 xl:py-3 transition-colors">
+        <div className="max-w-[1440px] 2xl:max-w-[1600px] mx-auto flex flex-col lg:flex-row items-center justify-between gap-2.5 sm:gap-3 lg:gap-6">
           
           {/* TOP ON MOBILE / LEFT ON DESKTOP: Government Seal & Mobile Language Switcher */}
           <div className="w-full lg:w-auto flex items-center justify-between gap-2 text-xs sm:text-[13px] text-slate-800">
@@ -229,29 +229,29 @@ export const Header: React.FC = () => {
           {/* DIGNITARIES STRIP & DESKTOP LANGUAGE SELECTOR */}
           <div className="w-full lg:w-auto flex items-center justify-between lg:justify-end gap-3 sm:gap-6">
             {/* The 3 Distinguished Leaders */}
-            <div className="w-full lg:w-auto flex items-center justify-between sm:justify-center lg:justify-end gap-2.5 sm:gap-5 lg:gap-6 overflow-x-auto no-scrollbar py-0.5">
+            <div className="w-full lg:w-auto flex items-center justify-between sm:justify-center lg:justify-end gap-2.5 sm:gap-4 xl:gap-6 overflow-x-auto no-scrollbar py-0.5">
               {leaders.map((leader) => (
                 <div
                   key={leader.key}
                   className="flex items-center gap-2 sm:gap-3 group cursor-default flex-shrink-0"
                 >
                   {/* Noticeably Enlarged & Crisp Portrait */}
-                  <div className="relative w-10 h-10 sm:w-12 sm:h-12 lg:w-13 lg:h-13 rounded-full overflow-hidden ring-2 ring-orange-400/80 shadow-md bg-orange-100 border-2 border-white flex-shrink-0 group-hover:scale-105 group-hover:ring-orange-500 transition-all duration-200">
+                  <div className="relative w-10 h-10 sm:w-11 sm:h-11 xl:w-12 xl:h-12 2xl:w-13 2xl:h-13 rounded-full overflow-hidden ring-2 ring-orange-400/80 shadow-md bg-orange-100 border-2 border-white flex-shrink-0 group-hover:scale-105 group-hover:ring-orange-500 transition-all duration-200">
                     <Image
                       src={leader.image}
                       alt={leader.name}
                       fill
                       className="object-cover object-top"
-                      sizes="(max-width: 640px) 44px, 56px"
+                      sizes="(max-width: 640px) 44px, (max-width: 1440px) 50px, 56px"
                       priority
                     />
                   </div>
                   {/* Prominent & Legible Typography */}
                   <div className="flex flex-col text-left">
-                    <span className="font-black text-[11px] sm:text-xs lg:text-[13.5px] text-slate-900 leading-tight group-hover:text-[#D95F1A] transition-colors whitespace-nowrap">
+                    <span className="font-black text-[11px] sm:text-xs xl:text-[13px] 2xl:text-[13.5px] text-slate-900 leading-tight group-hover:text-[#D95F1A] transition-colors whitespace-nowrap">
                       {leader.name}
                     </span>
-                    <span className="text-[9px] sm:text-[10px] lg:text-[11.5px] font-bold text-[#D95F1A] leading-tight mt-0.5 whitespace-nowrap">
+                    <span className="text-[9px] sm:text-[10px] xl:text-[11px] font-bold text-[#D95F1A] leading-tight mt-0.5 whitespace-nowrap">
                       {leader.role}
                     </span>
                   </div>
@@ -270,7 +270,7 @@ export const Header: React.FC = () => {
 
       {/* 3. MAIN EXECUTIVE GLASSMORPHIC STICKY NAVBAR */}
       <div className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200/90 shadow-xs transition-all">
-        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+        <div className="max-w-[1440px] 2xl:max-w-[1600px] mx-auto px-3 sm:px-6 lg:px-8 xl:px-10">
           <div className="flex items-center justify-between h-14 sm:h-16 lg:h-[68px]">
             
             {/* LEFT: Official Logo & Portal Identity */}

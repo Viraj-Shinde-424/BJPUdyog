@@ -265,10 +265,10 @@ export const HeroSearch: React.FC = () => {
   ];
 
   return (
-    <div id="search-section" className="bg-[#FAF7F2] border-b border-[#E8E2D5] py-10 sm:py-16 scroll-mt-6">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6">
+    <div id="search-section" className="bg-[#FAF7F2] border-b border-[#E8E2D5] py-10 sm:py-14 xl:py-16 scroll-mt-6">
+      <div className="max-w-[1440px] 2xl:max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10">
         {/* Executive Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-8">
+        <div className="text-center max-w-3xl xl:max-w-4xl mx-auto mb-8 xl:mb-10">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-100/80 border border-orange-200/80 text-[11px] font-bold text-[#D95F1A] mb-3 shadow-2xs">
             <Sparkles className="w-3.5 h-3.5" />
             <span>
@@ -280,7 +280,7 @@ export const HeroSearch: React.FC = () => {
             </span>
           </div>
 
-          <h2 className="text-xl sm:text-2xl lg:text-[30px] font-bold text-slate-900 tracking-tight leading-snug">
+          <h2 className="text-xl sm:text-2xl lg:text-[30px] xl:text-[34px] font-bold text-slate-900 tracking-tight leading-snug">
             {lang === 'en' ? (
               <>
                 What are you looking for in your{' '}
@@ -308,7 +308,7 @@ export const HeroSearch: React.FC = () => {
             )}
           </h2>
 
-          <p className="mt-2.5 text-xs sm:text-sm text-slate-600 leading-relaxed max-w-2xl mx-auto font-normal">
+          <p className="mt-2.5 text-xs sm:text-sm xl:text-base text-slate-600 leading-relaxed max-w-2xl xl:max-w-3xl mx-auto font-normal">
             {lang === 'en'
               ? 'Instant AI compliance guidance, 35+ Central & Maharashtra state government subsidies, and verified industrial networking.'
               : lang === 'hi'
@@ -318,18 +318,18 @@ export const HeroSearch: React.FC = () => {
         </div>
 
         {/* Smart Search Mode Segmented Control */}
-        <div className="flex justify-center mb-5">
+        <div className="flex justify-center mb-5 xl:mb-6">
           <div className="inline-flex flex-col sm:flex-row p-1 sm:p-1.5 rounded-xl bg-white border border-slate-200/90 shadow-xs gap-1 w-full sm:w-auto">
             <button
               type="button"
               onClick={() => setSearchMode('guidance')}
-              className={`flex items-center justify-center gap-2 px-3.5 sm:px-5 py-2 rounded-lg text-xs sm:text-sm font-bold transition-all ${
+              className={`flex items-center justify-center gap-2 px-3.5 sm:px-5 py-2 xl:py-2.5 rounded-lg text-xs sm:text-sm xl:text-[14.5px] font-bold transition-all ${
                 searchMode === 'guidance'
                   ? 'bg-[#D95F1A] text-white shadow-sm'
                   : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
               }`}
             >
-              <Compass className="w-4 h-4" />
+              <Compass className="w-4 h-4 xl:w-5 xl:h-5" />
               <span>
                 {lang === 'en'
                   ? 'AI Startup & Regulatory Advisor'
@@ -342,13 +342,13 @@ export const HeroSearch: React.FC = () => {
             <button
               type="button"
               onClick={() => setSearchMode('schemes')}
-              className={`flex items-center justify-center gap-2 px-3.5 sm:px-5 py-2 rounded-lg text-xs sm:text-sm font-bold transition-all ${
+              className={`flex items-center justify-center gap-2 px-3.5 sm:px-5 py-2 xl:py-2.5 rounded-lg text-xs sm:text-sm xl:text-[14.5px] font-bold transition-all ${
                 searchMode === 'schemes'
                   ? 'bg-[#136938] text-white shadow-sm'
                   : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
               }`}
             >
-              <Award className="w-4 h-4" />
+              <Award className="w-4 h-4 xl:w-5 xl:h-5" />
               <span>
                 {lang === 'en'
                   ? 'Govt Subsidies & Schemes'
@@ -361,8 +361,8 @@ export const HeroSearch: React.FC = () => {
         </div>
 
         {/* Flagship Omni-Search Console */}
-        <form onSubmit={handleSearch} className="max-w-3xl mx-auto mb-4">
-          <div className="relative flex flex-col sm:flex-row items-stretch sm:items-center rounded-2xl bg-white border-2 border-slate-200 focus-within:border-[#D95F1A] shadow-md p-1.5 sm:p-2 gap-2 sm:gap-0 transition-all">
+        <form onSubmit={handleSearch} className="max-w-3xl xl:max-w-4xl mx-auto mb-4">
+          <div className="relative flex flex-col sm:flex-row items-stretch sm:items-center rounded-2xl bg-white border-2 border-slate-200 focus-within:border-[#D95F1A] shadow-md p-1.5 sm:p-2 xl:p-2.5 gap-2 sm:gap-0 transition-all">
             <div className="flex items-center flex-1 min-w-0">
               <div className="pl-2.5 sm:pl-3.5 pr-2 text-slate-400 flex items-center justify-center flex-shrink-0">
                 <Search className="w-4 h-4 sm:w-5 sm:h-5 text-[#D95F1A]" />
@@ -385,7 +385,7 @@ export const HeroSearch: React.FC = () => {
                       ? 'उदा. सोलर रूफटॉप सब्सिडी, CMEGP उद्योग ऋण, PSI 2019 प्रोत्साहन...'
                       : 'उदा. सोलर रूफटॉप सबसिडी, CMEGP ५० लाख कर्ज, PSI 2019 व्याज सवलत...'
                 }
-                className="w-full py-2 sm:py-2.5 px-2 text-xs sm:text-sm text-slate-900 bg-transparent focus:outline-none placeholder:text-slate-400 font-medium"
+                className="w-full py-2 sm:py-2.5 xl:py-3 px-2 text-xs sm:text-sm xl:text-base text-slate-900 bg-transparent focus:outline-none placeholder:text-slate-400 font-medium"
               />
             </div>
 
@@ -393,7 +393,7 @@ export const HeroSearch: React.FC = () => {
               type="submit"
               size="md"
               variant={searchMode === 'guidance' ? 'primary' : 'secondary'}
-              className="py-2.5 px-5 sm:px-6 rounded-xl text-xs sm:text-sm font-bold shadow-xs whitespace-nowrap bg-[#D95F1A] hover:bg-[#B84A0E] flex items-center justify-center"
+              className="py-2.5 px-5 sm:px-6 xl:px-8 rounded-xl text-xs sm:text-sm xl:text-base font-bold shadow-xs whitespace-nowrap bg-[#D95F1A] hover:bg-[#B84A0E] flex items-center justify-center"
             >
               <span className="flex items-center gap-1.5">
                 <span>{t('hero', 'searchBtn')}</span>
@@ -404,8 +404,8 @@ export const HeroSearch: React.FC = () => {
         </form>
 
         {/* Curated Fast-Action Query Chips */}
-        <div className="flex items-center justify-start sm:justify-center gap-2 max-w-3xl mx-auto mb-8 sm:mb-10 overflow-x-auto no-scrollbar py-1">
-          <span className="text-[11px] font-bold text-slate-500 mr-0.5 whitespace-nowrap flex-shrink-0">
+        <div className="flex items-center justify-start sm:justify-center gap-2 max-w-3xl xl:max-w-4xl mx-auto mb-8 sm:mb-10 overflow-x-auto no-scrollbar py-1">
+          <span className="text-[11px] xl:text-xs font-bold text-slate-500 mr-0.5 whitespace-nowrap flex-shrink-0">
             {lang === 'en' ? 'Quick Searches:' : lang === 'hi' ? 'त्वरित खोज:' : 'त्वरित शोध:'}
           </span>
           {quickChips.map((chip, idx) => (
@@ -413,7 +413,7 @@ export const HeroSearch: React.FC = () => {
               key={idx}
               type="button"
               onClick={() => handleQuickPrompt(chip.query, chip.mode)}
-              className="px-3 py-1 rounded-full bg-white hover:bg-orange-50 border border-slate-200 hover:border-orange-300 text-[11px] font-semibold text-slate-700 hover:text-[#D95F1A] transition-all shadow-2xs hover:shadow-xs whitespace-nowrap flex-shrink-0"
+              className="px-3 py-1 rounded-full bg-white hover:bg-orange-50 border border-slate-200 hover:border-orange-300 text-[11px] xl:text-xs font-semibold text-slate-700 hover:text-[#D95F1A] transition-all shadow-2xs hover:shadow-xs whitespace-nowrap flex-shrink-0"
             >
               {chip.label}
             </button>
@@ -421,37 +421,37 @@ export const HeroSearch: React.FC = () => {
         </div>
 
         {/* 4 Flagship Gateway Pillars (Executive Card Architecture) */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-6xl mx-auto mb-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 xl:gap-6 max-w-[1440px] 2xl:max-w-[1600px] mx-auto mb-10 xl:mb-14">
           {quickActionCards.map((card, i) => {
             const Icon = card.icon;
             return (
               <Link
                 key={i}
                 href={card.href}
-                className={`bg-white rounded-2xl p-5 border ${card.color} shadow-2xs hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group flex flex-col justify-between`}
+                className={`bg-white rounded-2xl p-5 xl:p-6 border ${card.color} shadow-2xs hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group flex flex-col justify-between`}
               >
                 <div>
                   <div className="flex items-center justify-between mb-3.5">
-                    <div className={`w-10 h-10 rounded-xl ${card.accentBg} flex items-center justify-center transition-transform group-hover:scale-105`}>
-                      <Icon className="w-5 h-5" />
+                    <div className={`w-10 h-10 xl:w-12 xl:h-12 rounded-xl ${card.accentBg} flex items-center justify-center transition-transform group-hover:scale-105`}>
+                      <Icon className="w-5 h-5 xl:w-6 xl:h-6" />
                     </div>
-                    <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${card.badgeBg}`}>
+                    <span className={`text-[10px] xl:text-[11px] font-bold px-2 py-0.5 rounded-full ${card.badgeBg}`}>
                       {card.badge}
                     </span>
                   </div>
 
-                  <h3 className="text-base font-bold text-slate-900 group-hover:text-[#D95F1A] transition-colors leading-snug">
+                  <h3 className="text-base xl:text-lg font-bold text-slate-900 group-hover:text-[#D95F1A] transition-colors leading-snug">
                     {card.title}
                   </h3>
-                  <div className="text-[11px] font-semibold text-slate-500 mt-0.5 mb-2">
+                  <div className="text-[11px] xl:text-xs font-semibold text-slate-500 mt-0.5 mb-2">
                     {card.subtitle}
                   </div>
-                  <p className="text-xs text-slate-600 leading-relaxed font-normal">
+                  <p className="text-xs xl:text-sm text-slate-600 leading-relaxed font-normal">
                     {card.desc}
                   </p>
                 </div>
 
-                <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-[#D95F1A]">
+                <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs xl:text-sm font-bold text-[#D95F1A]">
                   <span>
                     {lang === 'en' ? 'Access Portal' : lang === 'hi' ? 'प्रवेश करें' : 'सविस्तर पहा'}
                   </span>
@@ -463,7 +463,7 @@ export const HeroSearch: React.FC = () => {
         </div>
 
         {/* Live State Impact & Verified Telemetry Ribbon */}
-        <div className="bg-white rounded-2xl border border-slate-200/90 p-4 sm:p-5 shadow-xs max-w-5xl mx-auto">
+        <div className="bg-white rounded-2xl border border-slate-200/90 p-4 sm:p-5 xl:p-6 shadow-xs max-w-[1440px] 2xl:max-w-[1600px] mx-auto">
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 divide-y sm:divide-y-0 sm:divide-x divide-slate-100">
             {trustMetrics.map((metric, i) => {
               const Icon = metric.icon;

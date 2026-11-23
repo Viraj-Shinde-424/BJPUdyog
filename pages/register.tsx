@@ -207,7 +207,7 @@ export default function RegisterPage() {
             </Card>
           ) : (
             /* CENTERED REGISTRATION FORM ONLY (NO LEFT SIDE CONTENT) */
-            <div className="max-w-3xl mx-auto">
+            <div className="max-w-3xl xl:max-w-4xl mx-auto">
               {/* Form Title & Top Banner */}
               <div className="text-center mb-8">
                 <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-orange-100 text-[#E35914] text-xs font-bold border border-orange-200 mb-3 shadow-2xs">

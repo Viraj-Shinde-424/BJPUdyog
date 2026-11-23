@@ -10,8 +10,8 @@ export const Footer: React.FC = () => {
   return (
     <footer className="bg-slate-900 text-slate-300 border-t-4 border-[#D95F1A] mt-16">
       {/* Statutory Disclosure Banner */}
-      <div className="bg-slate-950 py-3 px-4 border-b border-slate-800">
-        <div className="max-w-7xl mx-auto flex items-start sm:items-center gap-2.5 text-xs text-slate-400">
+      <div className="bg-slate-950 py-3 px-4 sm:px-6 lg:px-8 xl:px-10 border-b border-slate-800">
+        <div className="max-w-[1440px] 2xl:max-w-[1600px] mx-auto flex items-start sm:items-center gap-2.5 text-xs text-slate-400">
           <ShieldAlert className="w-4 h-4 text-[#F59E0B] flex-shrink-0 mt-0.5 sm:mt-0" />
           <p className="leading-relaxed">
             <strong className="text-slate-300">
@@ -26,7 +26,7 @@ export const Footer: React.FC = () => {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+      <div className="max-w-[1440px] 2xl:max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 py-10 xl:py-14">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Column 1: Organization & Contact */}
           <div className="md:col-span-1">

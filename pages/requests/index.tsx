@@ -81,7 +81,7 @@ export default function RequestsPage() {
       <div className="min-h-screen flex flex-col bg-[#F8FAFC]">
         <Header />
 
-        <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
+        <main className="flex-1 max-w-[1440px] 2xl:max-w-[1600px] w-full mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 py-6 xl:py-8 space-y-6">
           {/* Executive Service Tab Cards (Replaces old toggle button with spacious, modern executive cards) */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5 sm:gap-4">
             {/* Tab 1: Grievance Redressal */}

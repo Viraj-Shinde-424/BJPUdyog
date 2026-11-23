@@ -18,10 +18,10 @@ export const ResourcesGrid: React.FC = () => {
   const { lang, t } = useApp();
 
   return (
-    <section className="py-12 sm:py-16 bg-[#F8FAFC] border-b border-slate-200">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-12 sm:py-16 xl:py-20 bg-[#F8FAFC] border-b border-slate-200">
+      <div className="max-w-[1440px] 2xl:max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-10">
+        <div className="text-center max-w-3xl xl:max-w-4xl mx-auto mb-10 xl:mb-12">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-100/80 border border-orange-200/80 text-[11px] font-bold text-[#D95F1A] mb-3 shadow-2xs">
             <Sparkles className="w-3.5 h-3.5" />
             <span>
@@ -33,7 +33,7 @@ export const ResourcesGrid: React.FC = () => {
             </span>
           </div>
 
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight leading-tight">
+          <h2 className="text-2xl sm:text-3xl xl:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
             {lang === 'en'
               ? 'Enterprise Innovation Hub & Services'
               : lang === 'hi'
@@ -41,7 +41,7 @@ export const ResourcesGrid: React.FC = () => {
               : 'उद्योग साधने व शासकीय एक-खिडकी दालन'}
           </h2>
 
-          <p className="mt-2 text-xs sm:text-sm text-slate-600 leading-relaxed font-normal max-w-2xl mx-auto">
+          <p className="mt-2 text-xs sm:text-sm xl:text-base text-slate-600 leading-relaxed font-normal max-w-2xl xl:max-w-3xl mx-auto">
             {lang === 'en'
               ? 'AI-powered compliance navigator, smart subsidy finder, direct ministerial roundtables, and official single-window gateways.'
               : lang === 'hi'
@@ -51,7 +51,7 @@ export const ResourcesGrid: React.FC = () => {
         </div>
 
         {/* 3 Core Flagship Innovation Hub Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 xl:gap-8 mb-12 xl:mb-14">
           {/* 1. Udyog Saarthi (AI Startup Advisor) */}
           <div className="bg-white rounded-2xl p-6 border border-slate-200 hover:border-orange-300 shadow-xs hover:shadow-lg transition-all duration-300 flex flex-col justify-between group">
             <div>

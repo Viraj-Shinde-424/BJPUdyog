@@ -5,7 +5,7 @@ export const HomeVideoHero: React.FC = () => {
   const { t } = useApp();
 
   return (
-    <section className="relative w-full h-[55vh] min-h-[360px] sm:min-h-[440px] md:h-[calc(100vh-120px)] max-h-[780px] overflow-hidden bg-[#070D1E] flex flex-col justify-end items-center pb-8 sm:pb-14 px-4">
+    <section className="relative w-full h-[52vh] sm:h-[60vh] lg:h-[72vh] xl:h-[75vh] min-h-[380px] max-h-[760px] 2xl:max-h-[840px] overflow-hidden bg-[#070D1E] flex flex-col justify-end items-center pb-8 sm:pb-12 xl:pb-14 px-4">
       {/* 1. TRUE LANDSCAPE 1920x1080 ROTATED H.264 VIDEO RUNNING SILENTLY ON AUTO */}
       <video
         autoPlay
@@ -24,14 +24,14 @@ export const HomeVideoHero: React.FC = () => {
       <div className="absolute inset-0 bg-gradient-to-t from-[#070D1E]/95 via-[#070D1E]/45 to-black/20 z-10" />
 
       {/* 3. BOTTOM-ALIGNED TEXT WITH EXACT SIZED FONT & POSTRING STYLING AS SHOWN IN IMAGE */}
-      <div className="relative z-20 max-w-4xl mx-auto text-center flex flex-col items-center justify-center px-2">
+      <div className="relative z-20 max-w-4xl xl:max-w-5xl 2xl:max-w-6xl mx-auto text-center flex flex-col items-center justify-center px-4">
         {/* HEADING: Vibrant Saffron / Orange font with exact bold Poppins scale */}
-        <h1 className="text-[#FF7A1A] font-black font-['Poppins',sans-serif] text-xl sm:text-2xl md:text-3xl lg:text-[34px] tracking-tight leading-snug text-center max-w-4xl drop-shadow-[0_4px_16px_rgba(0,0,0,0.95)]">
+        <h1 className="text-[#FF7A1A] font-black font-['Poppins',sans-serif] text-xl sm:text-2xl md:text-3xl lg:text-[34px] xl:text-[36px] 2xl:text-[38px] tracking-tight leading-snug text-center max-w-4xl xl:max-w-5xl drop-shadow-[0_4px_16px_rgba(0,0,0,0.95)]">
           {t('videoHero', 'heading')}
         </h1>
 
         {/* SUBTITLE: Crisp white text, centered two-line balanced presence */}
-        <p className="mt-2 sm:mt-3 text-white/95 text-xs sm:text-sm md:text-base font-normal text-center max-w-2xl mx-auto leading-relaxed drop-shadow-[0_2px_10px_rgba(0,0,0,0.95)]">
+        <p className="mt-2 sm:mt-3 text-white/95 text-xs sm:text-sm md:text-base xl:text-lg font-normal text-center max-w-2xl xl:max-w-3xl mx-auto leading-relaxed drop-shadow-[0_2px_10px_rgba(0,0,0,0.95)]">
           {t('videoHero', 'subtitle')}
         </p>
       </div>
